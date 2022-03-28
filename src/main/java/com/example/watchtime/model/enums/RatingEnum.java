@@ -1,6 +1,6 @@
 package com.example.watchtime.model.enums;
 
-public enum Rating {
+public enum RatingEnum {
     ONE("1"),
     TWO("2"),
     THREE("3"),
@@ -14,7 +14,7 @@ public enum Rating {
 
     private final String ratings;
 
-    Rating(String ratings) {
+    RatingEnum(String ratings) {
         this.ratings = ratings;
     }
 
