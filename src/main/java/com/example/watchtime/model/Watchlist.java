@@ -1,29 +1,29 @@
 package com.example.watchtime.model;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
 
-
-@Entity
-@Table(name="tvshow")
+@ToString
+@Getter
+@Setter
+@EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
-public class TVShow extends OMDB {
+
+@Entity
+@Table(name="watchlist")
+public class Watchlist {
+
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column
-    @JoinColumn(name = "watchlist_id", referencedColumnName = "id")
+    @JoinColumn(name = "member_id", referencedColumnName = "id")
     @JsonIgnore
-    private int watchlist_id;
+    private int member_id;
 
-    @Column
-    @JoinColumn(name = "rating_id", referencedColumnName = "id")
-    @JsonIgnore
-    private int rating_id;
 }
