@@ -1,4 +1,4 @@
 package com.example.watchtime.model;
 
-public class TVShow {
+public class TVShow extends Omdb{
 }

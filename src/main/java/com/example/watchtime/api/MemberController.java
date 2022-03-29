@@ -1,4 +1,4 @@
-package com.example.watchtime.controller;
+package com.example.watchtime.api;
 
 import com.example.watchtime.model.Member;
 import com.example.watchtime.service.MemberService;
