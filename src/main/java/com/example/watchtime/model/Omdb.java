@@ -1,24 +1,16 @@
 package com.example.watchtime.model;
 
 import lombok.*;
-
 import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 @ToString
 @Getter
 @Setter
 @EqualsAndHashCode
-@AllArgsConstructor
 @NoArgsConstructor
-public class Omdb {
+@AllArgsConstructor
 
-    @Column
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    private long id;
+public class OMDB {
 
     @Column
     private String title;
