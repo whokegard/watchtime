@@ -1,7 +1,7 @@
 package com.example.watchtime.dao;
 
 import com.example.watchtime.model.Member;
-import com.example.watchtime.repositories.MemberRepository;
+import com.example.watchtime.repository.MemberRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 

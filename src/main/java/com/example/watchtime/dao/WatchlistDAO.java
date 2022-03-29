@@ -1,14 +1,12 @@
 package com.example.watchtime.dao;
 
 import com.example.watchtime.repository.WatchlistRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 @Repository
+@AllArgsConstructor
 public class WatchlistDAO {
-    WatchlistRepository repository;
-
-    public WatchlistDAO(WatchlistRepository repository) {
-        this.repository = repository;
-    }
+    private final  WatchlistRepository watchlistRepository;
 
 }

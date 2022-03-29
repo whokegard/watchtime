@@ -6,50 +6,24 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@ToString
-@Getter
-@Setter
-@EqualsAndHashCode
-@NoArgsConstructor
-@AllArgsConstructor
 
 @Entity
 @Table(name="tvshow")
-public class TVShow {
-
+@NoArgsConstructor
+@AllArgsConstructor
+public class TVShow extends OMDB {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private long id;
 
     @Column
     @JoinColumn(name = "watchlist_id", referencedColumnName = "id")
     @JsonIgnore
-    private Integer watchlist_id;
+    private int watchlist_id;
 
     @Column
     @JoinColumn(name = "rating_id", referencedColumnName = "id")
     @JsonIgnore
-    private Integer rating_id;
-
-    @Column
-    private String title;
-
-    @Column
-    private int episodes;
-
-    @Column
-    private int seasons;
-
-    @Column
-    private int imdbRating;
-
-    @Column
-    private boolean watched;
-
-
-
-
-
-
+    private int rating_id;
 }

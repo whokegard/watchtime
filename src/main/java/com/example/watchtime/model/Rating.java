@@ -1,9 +1,6 @@
 package com.example.watchtime.model;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-
 import javax.persistence.*;
 
 @ToString
@@ -12,7 +9,6 @@ import javax.persistence.*;
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
-
 @Entity
 @Table(name="rating")
 public class Rating {

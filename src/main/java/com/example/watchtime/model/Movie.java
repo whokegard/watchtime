@@ -1,39 +1,27 @@
 package com.example.watchtime.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-
 import javax.persistence.*;
 
-@ToString
-@Getter
-@Setter
-@EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "movies")
-public class Movie {
+public class Movie extends OMDB {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private int id;
+    private long id;
 
     @Column
-    private int watchlistId;
+    @JoinColumn(name = "watchlist_id", referencedColumnName = "id")
+    @JsonIgnore
+    private int watchlist_id;
 
     @Column
-    private boolean watched;
-
-    @Column
-    private int ratingId;
-
-    @Column
-    private int imdbRating;
-
-    @Column
-    private int runtime;
-
-    @Column
-    private String title;
+    @JoinColumn(name = "rating_id", referencedColumnName = "id")
+    @JsonIgnore
+    private int rating_id;
 }

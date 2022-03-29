@@ -1,4 +1,4 @@
-package com.example.watchtime.repositories;
+package com.example.watchtime.repository;
 
 import com.example.watchtime.model.Member;
 import org.springframework.data.repository.CrudRepository;

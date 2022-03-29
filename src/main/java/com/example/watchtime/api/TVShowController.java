@@ -17,7 +17,7 @@ public class TVShowController {
     }
 
     @GetMapping("/tvshow/{id}")
-    public TVShow getTVShowById(@PathVariable("id") Integer id) {
+    public TVShow getTVShowById(@PathVariable("id") Long id) {
         return tvShowService.getTVShowById(id);
     }
 }
