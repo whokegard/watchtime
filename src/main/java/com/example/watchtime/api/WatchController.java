@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("/api/members")
 @AllArgsConstructor
+@RequestMapping("/api")
 public class WatchController {
 
     @Autowired
