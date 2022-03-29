@@ -6,11 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @RestController
-@RequestMapping("/api/members")
+@RequestMapping("/api/watchlist")
 @AllArgsConstructor
-public class WatchController {
+public class WatchlistController {
 
     @Autowired
     private final WatchlistService watchlistService;
