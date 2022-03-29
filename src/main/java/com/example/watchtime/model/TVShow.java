@@ -20,17 +20,17 @@ public class TVShow {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
-    @ManyToOne
+    @Column
     @JoinColumn(name = "watchlist_id", referencedColumnName = "id")
     @JsonIgnore
-    private Watchlist watchlist;
+    private Integer watchlist_id;
 
-    @ManyToOne
+    @Column
     @JoinColumn(name = "rating_id", referencedColumnName = "id")
     @JsonIgnore
-    private Rating rating;
+    private Integer rating_id;
 
     @Column
     private String title;

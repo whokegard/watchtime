@@ -19,11 +19,11 @@ public class Watchlist {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
-    /*@OneToOne
+    @Column
     @JoinColumn(name = "member_id", referencedColumnName = "id")
     @JsonIgnore
-    private Member member;
-    */
+    private Integer member_id;
+
 }
