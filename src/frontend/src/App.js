@@ -23,6 +23,10 @@ function App() {
         setUsername(loggedIn);
     };
 
+    getAMember()
+        .then(res => res.json())
+        .then(console.log)
+
     return (
         <Router>
             <div className="App">
