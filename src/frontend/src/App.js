@@ -1,4 +1,5 @@
 import "./App.css";
+import { getAMember } from "./client";
 import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Routes, Link, Route } from "react-router-dom";
@@ -13,16 +14,6 @@ function App() {
     const [user, setUser] = useState({});
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    const childToParent = (childData) => {
-        setIsLoggedIn(true);
-        setUsername(childData);
-    };
-
-    const logout = () => {
-        setIsLoggedIn(false);
-        setUsername(loggedIn);
-    };
-
     getAMember()
         .then(res => res.json())
         .then(console.log)
@@ -32,12 +23,7 @@ function App() {
             <div className="App">
                 <LoggedInContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
                     <UserContext.Provider value={{ user, setUser }}>
-                        <Header
-                            childToParent={childToParent}
-                            onLogout={logout}
-                            loggedIn={loggedIn}
-                            isLoggedIn={isLoggedIn}
-                        />
+                        <Header />
                         <Routes>
                             <Route
                                 path="/"
@@ -51,7 +37,7 @@ function App() {
                                 path="/signin"
                                 element={
                                     <>
-                                        <SignIn childToParent={childToParent} />
+                                        <SignIn />
                                     </>
                                 }
                             />
