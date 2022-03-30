@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import javax.persistence.*;
 
+@ToString
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -11,17 +14,26 @@ import javax.persistence.*;
 public class Movie extends OMDB {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long movie_id;
 
     @Column
-    @JoinColumn(name = "watchlist_id", referencedColumnName = "id")
-    @JsonIgnore
+    private String title;
+
+    @Column
+    private int year;
+
+    @Column
+    private String type;
+
+    @Column
+   /* @JoinColumn(name = "watchlist_id", referencedColumnName = "id")
+    @JsonIgnore*/
     private int watchlist_id;
 
     @Column
-    @JoinColumn(name = "rating_id", referencedColumnName = "id")
-    @JsonIgnore
+    /*@JoinColumn(name = "rating_id", referencedColumnName = "id")
+    @JsonIgnore*/
     private int rating_id;
 }
