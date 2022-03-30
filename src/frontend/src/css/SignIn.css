@@ -1,0 +1,65 @@
+.signin {
+    font-family: SignikaSC;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #1d1d1d;
+    color: #fff;
+    height: 100vh;
+}
+
+.loginForm {
+    height: 25px;
+    border: 1px solid rgb(0, 0, 0);
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+
+input[type="submit"] {
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    background: #01d28e;
+    border: 1px solid #01d28e;
+    color: #fff;
+    padding: 10px 20px;
+}
+
+input[type="submit"]:hover {
+    background: #6cf0c2;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+}
+
+.login-form {
+    background-color: #292d31;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 15px 15px 0px 0px rgba(255, 255, 255, 0.2);
+}
+
+.list-container {
+    display: flex;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+
+.title {
+    font-size: 35px;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 10px;
+}
