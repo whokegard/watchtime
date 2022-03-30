@@ -7,7 +7,7 @@ const Footer = () => {
             <Card.Body className="border-top border-secondary"
             >
                 <Card.Text style={{ color: "#909096" }}>
-                    &copy; 2022 Realest Estates<br></br> Privacy · Terms · Sitemap ·
+                    &copy; 2022 WatchTime<br></br> Privacy · Terms ·
                     Company Details
                 </Card.Text>
             </Card.Body>
