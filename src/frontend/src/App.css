@@ -1,6 +1,14 @@
 :root {
-  --primary-color: #fff;
-  --secondary-color: #2f4208;
+  --watchtime-color: linear-gradient(#454545, #303030);
+  --primary-color: #b80f0a;
+  --btn-color-hover: #ff2400;
+  --secondary-color: #fff;
+  --third-color: #000;
+}
+
+.dark-theme {
+  --primary-color: #2f4208;
+  --secondary-color: #fff;
   --third-color: #000;
 }
 

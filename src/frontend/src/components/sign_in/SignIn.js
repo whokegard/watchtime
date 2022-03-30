@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import "./../../css/SignIn.css";
 import { LoggedInContext } from "../general/LoggedInContext";
 import { UserContext } from "../general/UserContext";
@@ -79,6 +79,7 @@ const SignIn = () => {
                     <label>Password</label>
                     <input className="loginForm" type="password" name="pass" required />
                     {renderErrorMessage("pass")}
+                    <Link className="register" to ="/register">Create account</Link>
                 </div>
                 <input type="submit" value="Login" />
                 <div className="button-container"></div>

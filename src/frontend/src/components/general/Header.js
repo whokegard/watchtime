@@ -35,7 +35,7 @@ const Header = () => {
                     <Navbar.Brand href="/">
                         <img
                             src=""
-                            alt="logo"
+                            alt="watchtime"
                             width="100%"
                             height="auto"
                             className="d-inline-block align-top d-none d-sm-block"
@@ -51,31 +51,32 @@ const Header = () => {
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav
-                            className=" nav navbar-nav ms-auto"
+                            className="nav navbar-nav ms-auto"
                             style={{ fontSize: "30px" }}
                         >
                             <Link className="link" to="/">
                                 Home
                             </Link>
-                            <Link className="link" to="/services">
-                                Services
-                            </Link>
-                            <Link className="link" to="/about">
-                                About
-                            </Link>
-                            <Link className="link" to="/browse">
-                                Browse
-                            </Link>
-                            <Link className="link" to="/blog">
-                                Blog
-                            </Link>
-                            <Link className="link" to="/contact">
-                                Contact us
-                            </Link>
+                            {!isLoggedIn ? (
+                                <Link className="link" to="/explore">
+                                    Explore
+                                </Link>
+                            ) : (
+                                <></>
+                            )
+                            }
+                            {!isLoggedIn ? (
+                                <Link className="link" to="/profile">
+                                    Profile
+                                </Link>
+                            ) : (
+                                <></>
+                            )
+                            }
                             {!isLoggedIn ? (
                                 <Link
                                     className="link"
-                                    style={{ marginLeft: "40px" }}
+                                    style={{ marginLeft: "50px", fontSize: "20px" }}
                                     to="/signin"
                                 >
                                     Sign In

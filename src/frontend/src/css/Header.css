@@ -1,17 +1,20 @@
 .header {
-    background-color: #181818 !important;
+    background: var(--watchtime-color);
 }
 
 .link {
-    color: #909096;
+    color: var(--primary-color);
     text-decoration: none;
     margin-left: 1rem;
+    display: flex;
+    align-items: center;
 }
 
 .link:hover {
-    color: #fff;
+    color: var(--secondary-color);
 }
 
 .link:focus {
     color: #fff;
 }
+

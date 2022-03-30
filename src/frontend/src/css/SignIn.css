@@ -19,14 +19,14 @@ input[type="submit"] {
     margin-top: 10px;
     cursor: pointer;
     font-size: 15px;
-    background: #01d28e;
-    border: 1px solid #01d28e;
+    background: var(--primary-color);
+    border: 2px solid var(--btn-color-hover);
     color: #fff;
     padding: 10px 20px;
 }
 
 input[type="submit"]:hover {
-    background: #6cf0c2;
+    background: var(--btn-color-hover);
 }
 
 .button-container {
@@ -35,7 +35,7 @@ input[type="submit"]:hover {
 }
 
 .login-form {
-    background-color: #292d31;
+    background: var(--watchtime-color);
     padding: 40px;
     border-radius: 15px;
     box-shadow: 15px 15px 0px 0px rgba(255, 255, 255, 0.2);
@@ -46,7 +46,7 @@ input[type="submit"]:hover {
 }
 
 .error {
-    color: red;
+    color: var(--primary-color);
     font-size: 12px;
     font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
 }
@@ -62,4 +62,14 @@ input[type="submit"]:hover {
     flex-direction: column;
     gap: 8px;
     margin: 10px;
+}
+
+.register {
+    text-decoration: none;
+    color: var(--btn-color-hover);
+    font-size: 20px;
+}
+
+.register:hover {
+    color: var(--secondary-color);
 }
