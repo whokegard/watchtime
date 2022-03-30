@@ -1,20 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
-import { Navbar, Container, Nav, Col } from "react-bootstrap";
+import { Navbar, Container, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { BiLogIn } from "react-icons/bi";
 import Logout from "./Logout";
 import "./../../css/Header.css";
+import { LoggedInContext } from "./LoggedInContext";
+import { UserContext } from "./UserContext";
 
-const Header = ({ loggedIn, isLoggedIn, onLogout }) => {
-    const [showSignOut, setShowSignOut] = useState(isLoggedIn ? true : false);
+const Header = () => {
+    const { user } = useContext(UserContext);
+    const { isLoggedIn } = useContext(LoggedInContext);
+    const [showSignOut, setShowSignOut] = useState(false);
 
     const handleLogin = () => {
         setShowSignOut(!showSignOut);
     };
 
-    const handleLogout = () => {
-        setShowSignOut(!false);
+    const logout = () => {
+        setShowSignOut(false);
     };
 
     return (
@@ -30,12 +34,14 @@ const Header = ({ loggedIn, isLoggedIn, onLogout }) => {
                 <Container fluid>
                     <Navbar.Brand href="/">
                         <img
+                            src=""
                             alt="logo"
                             width="100%"
                             height="auto"
                             className="d-inline-block align-top d-none d-sm-block"
                         />
                         <img
+                            src=""
                             alt="logo"
                             width="100%"
                             height="auto"
@@ -48,14 +54,31 @@ const Header = ({ loggedIn, isLoggedIn, onLogout }) => {
                             className=" nav navbar-nav ms-auto"
                             style={{ fontSize: "30px" }}
                         >
+                            <Link className="link" to="/">
+                                Home
+                            </Link>
+                            <Link className="link" to="/services">
+                                Services
+                            </Link>
+                            <Link className="link" to="/about">
+                                About
+                            </Link>
+                            <Link className="link" to="/browse">
+                                Browse
+                            </Link>
+                            <Link className="link" to="/blog">
+                                Blog
+                            </Link>
+                            <Link className="link" to="/contact">
+                                Contact us
+                            </Link>
                             {!isLoggedIn ? (
                                 <Link
-                                    onClick={isLoggedIn && handleLogin}
                                     className="link"
                                     style={{ marginLeft: "40px" }}
                                     to="/signin"
                                 >
-                                    {loggedIn}
+                                    Sign In
                                     <BiLogIn />
                                 </Link>
                             ) : (
@@ -65,13 +88,11 @@ const Header = ({ loggedIn, isLoggedIn, onLogout }) => {
                                     className="link"
                                     style={{ marginLeft: "40px" }}
                                 >
-                                    {loggedIn}
+                                    {user.username}
                                     <BiLogIn />
                                 </Link>
                             )}
-                            {showSignOut && (
-                                <Logout onClick={handleLogout} onLogout={onLogout} />
-                            )}
+                            {showSignOut && <Logout handleLogOut={logout} />}
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

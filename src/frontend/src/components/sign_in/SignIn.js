@@ -1,34 +1,33 @@
-import React, { useState } from "react";
-import ReactDOM from "react-dom";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Home from "../home/Home";
 import "./../../css/SignIn.css";
+import { LoggedInContext } from "../general/LoggedInContext";
+import { UserContext } from "../general/UserContext";
 
-const SignIn = ({ childToParent }) => {
+const SignIn = () => {
+    const { setIsLoggedIn } = useContext(LoggedInContext);
+    const { setUser } = useContext(UserContext);
+    const [users, setUsers] = useState([]);
     const [errorMessages, setErrorMessages] = useState({});
     const [isSubmitted, setIsSubmitted] = useState(false);
-    const [username, setUsername] = useState("");
     const navigate = useNavigate();
 
     // User Login info
-    const database = [
-        {
-            username: "love",
-            password: "admin",
-        },
-        {
-            username: "benjamin",
-            password: "admin",
-        },
-        {
-            username: "sebastian",
-            password: "admin",
-        },
-        {
-            username: "william",
-            password: "admin",
-        },
-    ];
+    useEffect(() => {
+        const getUsers = async () => {
+            const usersFromSever = await fetchUsers();
+            setUsers(usersFromSever);
+        };
+
+        getUsers();
+    }, []);
+
+    const fetchUsers = async () => {
+        const res = await fetch("http://localhost:5000/users");
+        const data = res.json();
+
+        return data;
+    };
 
     const errors = {
         uname: "Invalid Username",
@@ -42,7 +41,7 @@ const SignIn = ({ childToParent }) => {
         var { uname, pass } = document.forms[0];
 
         // Find user login info
-        const userData = database.find((user) => user.username === uname.value);
+        const userData = users.find((user) => user.username === uname.value);
 
         // Compare user info
         if (userData) {
@@ -51,7 +50,8 @@ const SignIn = ({ childToParent }) => {
 
                 setErrorMessages({ name: "pass", message: errors.pass });
             } else {
-                childToParent(username);
+                setUser(userData);
+                setIsLoggedIn(true);
                 setIsSubmitted(true);
             }
         } else {
@@ -72,13 +72,7 @@ const SignIn = ({ childToParent }) => {
             <form onSubmit={handleSubmit}>
                 <div className="input-container">
                     <label>Username</label>
-                    <input
-                        className="loginForm"
-                        onChange={(e) => setUsername(e.target.value)}
-                        type="text"
-                        name="uname"
-                        required
-                    />
+                    <input className="loginForm" type="text" name="uname" required />
                     {renderErrorMessage("uname")}
                 </div>
                 <div className="input-container">

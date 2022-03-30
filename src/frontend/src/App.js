@@ -6,11 +6,12 @@ import Header from "./components/general/Header";
 import Footer from "./components/general/Footer";
 import SignIn from "./components/sign_in/SignIn";
 import Home from "./components/home/Home";
+import { LoggedInContext } from "./components/general/LoggedInContext";
+import { UserContext } from "./components/general/UserContext";
 
 function App() {
+    const [user, setUser] = useState({});
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [username, setUsername] = useState("");
-    const loggedIn = isLoggedIn ? username : "Sign In";
 
     const childToParent = (childData) => {
         setIsLoggedIn(true);
@@ -25,31 +26,35 @@ function App() {
     return (
         <Router>
             <div className="App">
-                <Header
-                    childToParent={childToParent}
-                    onLogout={logout}
-                    loggedIn={loggedIn}
-                    isLoggedIn={isLoggedIn}
-                />
-                <Routes>
-                    <Route
-                        path="/"
-                        element={
-                            <>
-                                <Home />
-                            </>
-                        }
-                    />
-                    <Route
-                        path="/signin"
-                        element={
-                            <>
-                                <SignIn childToParent={childToParent} />
-                            </>
-                        }
-                    />
-                </Routes>
-                <Footer />
+                <LoggedInContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
+                    <UserContext.Provider value={{ user, setUser }}>
+                        <Header
+                            childToParent={childToParent}
+                            onLogout={logout}
+                            loggedIn={loggedIn}
+                            isLoggedIn={isLoggedIn}
+                        />
+                        <Routes>
+                            <Route
+                                path="/"
+                                element={
+                                    <>
+                                        <Home />
+                                    </>
+                                }
+                            />
+                            <Route
+                                path="/signin"
+                                element={
+                                    <>
+                                        <SignIn childToParent={childToParent} />
+                                    </>
+                                }
+                            />
+                        </Routes>
+                        <Footer />
+                </UserContext.Provider>
+            </LoggedInContext.Provider>
             </div>
         </Router>
   );

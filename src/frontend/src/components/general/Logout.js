@@ -1,11 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import "./../../css/Logout.css";
+import { LoggedInContext } from "./LoggedInContext";
 
-const Logout = (onLogout) => {
+const Logout = ({ handleLogout }) => {
+    const { setIsLoggedIn } = useContext(LoggedInContext);
+
+    const onLogout = () => {
+        setIsLoggedIn(false);
+    };
+
     return (
         <div className="logout">
-            <Link onClick={onLogout} className="logout__link" to="/signin">
+            <Link
+                onClick={{ handleLogout, onLogout }}
+                className="logout__link"
+                to="/signin"
+            >
                 Sign Out
             </Link>
         </div>
