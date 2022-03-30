@@ -14,4 +14,12 @@ public class TVShowDAO {
     public Optional<TVShow> findTVShowById(Long id) {
         return tvShowRepository.findById(id);
     }
+
+    public void deleteById(long member_id, long tvshow_id) {
+        tvShowRepository.deleteById(tvshow_id);
+    }
+
+    public void deleteAllTVShows() {
+        tvShowRepository.deleteAll();
+    }
 }

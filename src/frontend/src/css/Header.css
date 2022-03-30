@@ -1,0 +1,17 @@
+.header {
+    background-color: #181818 !important;
+}
+
+.link {
+    color: #909096;
+    text-decoration: none;
+    margin-left: 1rem;
+}
+
+.link:hover {
+    color: #fff;
+}
+
+.link:focus {
+    color: #fff;
+}

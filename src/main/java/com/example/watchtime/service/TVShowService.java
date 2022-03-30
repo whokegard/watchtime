@@ -16,4 +16,12 @@ public class TVShowService {
         Optional<TVShow> idTVShow = tvShowDAO.findTVShowById(id);
         return idTVShow.orElse(null);
     }
+
+    public void deleteTVShowById(long member_id, long tvshow_id) {
+        tvShowDAO.deleteById(member_id, tvshow_id);
+    }
+
+    public void deleteAllTVShows() {
+        tvShowDAO.deleteAllTVShows();
+    }
 }

@@ -15,7 +15,7 @@ public class TVShow extends OMDB {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long tvshow_id;
 
     @Column
     @JoinColumn(name = "watchlist_id", referencedColumnName = "id")
