@@ -3,10 +3,10 @@ import { Card, Button } from "react-bootstrap";
 
 const Footer = () => {
     return (
-        <div className="text-center" style={{ background: "#181818" }}>
+        <div className="text-center" style={{ background: "linear-gradient(#303030, #454545)" }}>
             <Card.Body className="border-top border-secondary"
             >
-                <Card.Text style={{ color: "#909096" }}>
+                <Card.Text style={{ color: "var(--primary-color)" }}>
                     &copy; 2022 WatchTime<br></br> Privacy · Terms ·
                     Company Details
                 </Card.Text>
