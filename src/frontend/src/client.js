@@ -13,3 +13,7 @@ const checkStatus = response => {
 export const getAMember = () =>
     fetch("api/members/13")
         .then(checkStatus);
+
+export const getAMembersMovies = () =>
+    fetch("api/movies/{13}")
+        .then(checkStatus);
