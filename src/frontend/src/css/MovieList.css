@@ -1,0 +1,11 @@
+.movie_list {
+    margin: 5rem 3rem;
+    padding: 1rem;
+    /*border-top: 1px solid #909096;
+    border-bottom: 1px solid #909096;*/
+}
+
+h5 {
+    font-weight: 600;
+    color: #f7f7f7;
+}

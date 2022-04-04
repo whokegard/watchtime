@@ -19,10 +19,7 @@ public class Movie extends OMDB {
     private long movie_id;
 
     @Column
-    private String title;
-
-    @Column
-    private int year;
+    private String imdb_id;
 
     @Column
     private String type;

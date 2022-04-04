@@ -1,11 +1,14 @@
 package com.example.watchtime.service;
 
+import com.example.watchtime.api.OMDBController;
 import com.example.watchtime.dao.MovieDAO;
 import com.example.watchtime.model.Member;
 import com.example.watchtime.model.Movie;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,6 +17,8 @@ import java.util.stream.Collectors;
 public class MovieService {
 
     private final MovieDAO movieDAO;
+
+    //private final OMDBController omdbController;
 
     public void addMovie(Movie newMovie) {
         movieDAO.save(newMovie);
@@ -52,4 +57,14 @@ public class MovieService {
                 filter(movie -> movie.getTitle().equalsIgnoreCase(title)).
                 collect(Collectors.toList());
     }
+
+    /*public List<String> getAllMoviePostersOfAMember(long watchlistId) {
+        List<Movie> allMovies = getAllOfAMembersMovies(watchlistId);
+        List<String> posters = new ArrayList<>();
+        for (Movie m : allMovies) {
+            posters.add(omdbController.getPoster(m.getTitle(), m.getYear()));
+        }
+
+        return posters;
+    }*/
 }

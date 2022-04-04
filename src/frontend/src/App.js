@@ -1,5 +1,5 @@
 import "./App.css";
-import { getAMember } from "./client";
+import {getAllOfAMembersMovies, getAMember} from "./client";
 import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Routes, Link, Route } from "react-router-dom";
@@ -7,6 +7,7 @@ import Header from "./components/general/Header";
 import Footer from "./components/general/Footer";
 import SignIn from "./components/sign_in/SignIn";
 import Home from "./components/home/Home";
+import Profile from "./components/profile/Profile";
 import { LoggedInContext } from "./components/general/LoggedInContext";
 import { UserContext } from "./components/general/UserContext";
 
@@ -38,6 +39,14 @@ function App() {
                                 element={
                                     <>
                                         <SignIn />
+                                    </>
+                                }
+                            />
+                            <Route
+                                path="/profile"
+                                element={
+                                    <>
+                                        <Profile/>
                                     </>
                                 }
                             />
