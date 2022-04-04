@@ -4,6 +4,7 @@ import Card from "react-bootstrap/Card";
 import "./../../css/Cards.css";
 
 const Cards = () => {
+    const API_KEY = 'ce762116';
     const cards = [
         {
             id: 1,

@@ -34,7 +34,7 @@ const Header = () => {
                 <Container fluid>
                     <Navbar.Brand href="/">
                         <img
-                            src=""
+                            src="src/frontend/images/WatchTime_red.png"
                             alt="watchtime"
                             width="100%"
                             height="auto"
