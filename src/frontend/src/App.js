@@ -10,14 +10,12 @@ import Home from "./components/home/Home";
 import Profile from "./components/profile/Profile";
 import { LoggedInContext } from "./components/general/LoggedInContext";
 import { UserContext } from "./components/general/UserContext";
+import Register from "./components/sign_in/Register";
 
 function App() {
     const [user, setUser] = useState({});
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-    getAMember()
-        .then(res => res.json())
-        .then(console.log)
+    getAMember().then(res => res.json()).then(console.log);
 
     return (
         <Router>
@@ -47,6 +45,14 @@ function App() {
                                 element={
                                     <>
                                         <Profile/>
+                                    </>
+                                }
+                            />
+                            <Route
+                                path="/register"
+                                element={
+                                    <>
+                                        <Register/>
                                     </>
                                 }
                             />

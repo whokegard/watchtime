@@ -11,7 +11,7 @@ const checkStatus = response => {
 }
 
 export const getAMember = () =>
-    fetch("api/members/13")
+    fetch("api/members/1")
         .then(checkStatus);
 
 export const getAllOfAMembersMovies = () =>
@@ -19,7 +19,7 @@ export const getAllOfAMembersMovies = () =>
         .then(checkStatus);
 
 export const getAMembersMoviePosters = () =>
-    fetch("api/movies/{13}/posters")
+    fetch("api/movies/{1}/posters")
         .then(checkStatus);
 
 export const registerAMember = member =>

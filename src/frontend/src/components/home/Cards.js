@@ -8,37 +8,37 @@ const Cards = () => {
     const cards = [
         {
             id: 1,
-            src: "images/insurance.jpg",
+            src: "",
             title: "Insurance",
             text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquet ipsum urna mauris integer eleifend quam neque.",
         },
         {
             id: 2,
-            src: "images/valuation.jpg",
+            src: "",
             title: "Valuation",
             text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquet ipsum urna mauris integer eleifend quam neque.",
         },
         {
             id: 3,
-            src: "images/bidding.jpg",
+            src: "",
             title: "Bidding",
             text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquet ipsum urna mauris integer eleifend quam neque.",
         },
         {
             id: 4,
-            src: "images/houses.jpg",
+            src: "",
             title: "Research suburbs",
             text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquet ipsum urna mauris integer eleifend quam neque.",
         },
         {
             id: 5,
-            src: "images/loan.jpg",
+            src: "",
             title: "We do home loans",
             text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquet ipsum urna mauris integer eleifend quam neque.",
         },
         {
             id: 6,
-            src: "images/tracker.jpg",
+            src: "",
             title: "Track your property",
             text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquet ipsum urna mauris integer eleifend quam neque.",
         },
