@@ -17,6 +17,16 @@ export const getAMember = () =>
 export const getAllOfAMembersMovies = () =>
     fetch("api/movies/1")
         .then(checkStatus);
+
 export const getAMembersMoviePosters = () =>
     fetch("api/movies/{13}/posters")
         .then(checkStatus);
+
+export const registerAMember = member =>
+    fetch("/api/members", {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        method: 'POST',
+        body: JSON.stringify(member)
+    })
