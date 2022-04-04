@@ -14,6 +14,9 @@ export const getAMember = () =>
     fetch("api/members/13")
         .then(checkStatus);
 
-export const getAMembersMovies = () =>
-    fetch("api/movies/{13}")
+export const getAllOfAMembersMovies = () =>
+    fetch("api/movies/1")
+        .then(checkStatus);
+export const getAMembersMoviePosters = () =>
+    fetch("api/movies/{13}/posters")
         .then(checkStatus);

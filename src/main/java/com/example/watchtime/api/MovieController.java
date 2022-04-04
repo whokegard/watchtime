@@ -38,8 +38,14 @@ public class MovieController {
 
         return movieService.getAllOfAMembersMovies(watchlistId);
     }
+
     @DeleteMapping("/{movieId}")
     public void removeMovieFromAMembersList(@PathVariable("movieId") long movieId) {
         movieService.removeMovieFromAMembersList(movieId);
     }
+
+    /*@GetMapping("/{id}/posters")
+    public List<String> allMoviePostersOfAMember(@PathVariable("id") long watchlistId) {
+        return movieService.getAllMoviePostersOfAMember(watchlistId);
+    }*/
 }
