@@ -1,0 +1,92 @@
+import {Input, Col, Form, Row, Button} from 'antd';
+import React from "react";
+import { useNavigate} from "react-router";
+import {registerAMember} from "../../client";
+
+
+const Register = () => {
+    const navigate = useNavigate();
+
+        const onFinish = member => {
+            registerAMember(member);
+            navigate("/signin")
+        };
+
+        const onFinishFailed = errorInfo => {
+            alert(JSON.stringify(errorInfo, null, 2));
+        };
+
+        return (
+            <div style={{marginTop: "5rem"}}>
+                <Form layout="vertical"
+                      onFinishFailed={onFinishFailed}
+                      onFinish={onFinish}
+                      hideRequiredMark>
+                    <Row gutter={16}>
+                        <Col span={12}>
+                            <Form.Item
+                                name="firstName"
+                                label="First name"
+                                rules={[{required: true, message: 'Please enter your first name'}]}
+                            >
+                                <Input/>
+                            </Form.Item>
+                        </Col>
+                        <Col span={12}>
+                            <Form.Item
+                                name="lastName"
+                                label="Last name"
+                                rules={[{required: true, message: 'Please enter your last name'}]}
+                            >
+                                <Input />
+                            </Form.Item>
+                        </Col>
+                    </Row>
+                    <Row gutter={16}>
+                        <Col span={12}>
+                            <Form.Item
+                                name="email"
+                                label="Email"
+                                rules={[{required: true, message: 'Please enter your email'}]}
+                            >
+                                <Input placholder={"Please enter Username"} />
+                            </Form.Item>
+                        </Col>
+                    </Row>
+                    <Row gutter={16}>
+                        <Col span={12}>
+                            <Form.Item
+                                name="username"
+                                label="Username"
+                                rules={[{required: true, message: 'Please enter your username'}]}
+                            >
+                                <Input />
+                            </Form.Item>
+                        </Col>
+                    </Row>
+                    <Row gutter={16}>
+                        <Col span={12}>
+                            <Form.Item
+                                name="password"
+                                label="Password"
+                                rules={[{required: true, message: 'Please enter password'}]}
+                            >
+                                <Input placholder={"Please enter password"} />
+                            </Form.Item>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col span={12}>
+                            <Form.Item >
+                                <Button type="primary" htmlType="submit">
+                                    Submit
+                                </Button>
+                            </Form.Item>
+                        </Col>
+                    </Row>
+                </Form>
+            </div>
+        );
+    }
+
+export default Register;
