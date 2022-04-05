@@ -73,11 +73,12 @@ const MovieCard = ({imdbId}) => {
                         borderRadius: "5px",
                     }}
                     variant="top"
-                    src={movie && movie.Poster}/*
-                    onClick={setShowDetail}*/
+                    src={movie && movie.Poster}
+                    /*onClick={setShowDetail}*/
                 />
             </Card>
-            {/*<Modal
+            {/*{
+                <Modal
                 title='Detail'
                 centered
                 visible={activateModal}
@@ -89,7 +90,8 @@ const MovieCard = ({imdbId}) => {
                     (<MovieDetail {...detail} />) :
                     <></>
                 }
-            </Modal>*/}
+            </Modal>
+            }*/}
         </div>
     );
 }

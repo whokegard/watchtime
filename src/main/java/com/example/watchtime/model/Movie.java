@@ -22,9 +22,6 @@ public class Movie extends OMDB {
     private String imdb_id;
 
     @Column
-    private String type;
-
-    @Column
    /* @JoinColumn(name = "watchlist_id", referencedColumnName = "id")
     @JsonIgnore*/
     private int watchlist_id;
@@ -33,4 +30,9 @@ public class Movie extends OMDB {
     /*@JoinColumn(name = "rating_id", referencedColumnName = "id")
     @JsonIgnore*/
     private int rating_id;
+
+    @Column
+    /*@JoinColumn(name = "rating_id", referencedColumnName = "id")
+    @JsonIgnore*/
+    private int watched_id;
 }

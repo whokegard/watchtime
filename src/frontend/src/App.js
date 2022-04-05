@@ -9,9 +9,9 @@ import SignIn from "./components/sign_in/SignIn";
 import Home from "./components/home/Home";
 import Profile from "./components/profile/Profile";
 import Register from "./components/sign_in/Register";
+import Explore from "./components/explore/Explore"
 import { LoggedInContext } from "./components/general/LoggedInContext";
 import { UserContext } from "./components/general/UserContext";
-import Explore from "./components/explore/Explore";
 
 function App() {
     const [user, setUser] = useState({});
@@ -49,6 +49,14 @@ function App() {
                                 element={
                                     <>
                                         <Profile />
+                                    </>
+                                }
+                            />
+                            <Route
+                                path="/explore"
+                                element={
+                                    <>
+                                        <Explore />
                                     </>
                                 }
                             />

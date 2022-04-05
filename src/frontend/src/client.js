@@ -30,3 +30,12 @@ export const registerAMember = member =>
         method: 'POST',
         body: JSON.stringify(member)
     });
+
+export const addMovie = movie =>
+    fetch("/api/movies", {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        method: 'POST',
+        body: JSON.stringify(movie)
+    });
