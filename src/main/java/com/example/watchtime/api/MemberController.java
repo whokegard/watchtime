@@ -26,6 +26,12 @@ public class MemberController {
         return memberService.getMemberByID(id);
     }
 
+    @GetMapping("/{username}/{password}")
+    public Member getMemberByUsernameAndPass(
+            @PathVariable("username") String username, @PathVariable String password) {
+        return memberService.getMemberByUsernameAndPass(username, password);
+    }
+
     @DeleteMapping("/{id}")
     public void deleteMemberById(@PathVariable("id") long id) {
         memberService.deleteMemberById(id);

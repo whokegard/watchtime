@@ -39,3 +39,7 @@ export const addMovie = movie =>
         method: 'POST',
         body: JSON.stringify(movie)
     });
+
+export const getMemberByUsernameAndPassword = (username, password) =>
+    fetch(`api/members/${username}/${password}`)
+        .then(checkStatus);

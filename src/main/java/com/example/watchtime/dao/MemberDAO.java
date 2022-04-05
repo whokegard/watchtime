@@ -26,4 +26,8 @@ public class MemberDAO {
     public void deleteMemberById(long id) {
         memberRepository.deleteById(id);
     }
+
+    public Iterable<Member> getAllMembers() {
+        return memberRepository.findAll();
+    }
 }

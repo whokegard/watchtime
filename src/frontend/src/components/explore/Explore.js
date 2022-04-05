@@ -16,9 +16,17 @@ const Explore = () => {
     const [searchResult, setSearchResult] = useState(null);
     const [query, setQuery] = useState("");
 
+    const movie = {
+        imdb_id: null,
+        watchlist_id: 1,
+        rating_id: null,
+        watched_id: 0
+    };
+
     const addMovieOrTvShow = result => {
         if (result.Type === "movie") {
-            addMovie(...result);
+            movie.imdb_id = result.imdbID;
+            addMovie(movie);
         }
         else if (result.Type === "series") {
         }
