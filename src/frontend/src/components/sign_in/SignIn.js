@@ -11,7 +11,7 @@ const SignIn = () => {
     const [errorMessages, setErrorMessages] = useState({});
     const [isSubmitted, setIsSubmitted] = useState(false);
     const navigate = useNavigate();
-
+/*
     // User Login info
     useEffect(() => {
         const getUsers = async () => {
@@ -27,7 +27,7 @@ const SignIn = () => {
         const data = res.json();
 
         return data;
-    };
+    };*/
 
     const errors = {
         uname: "Invalid Username",
@@ -79,7 +79,7 @@ const SignIn = () => {
                     <label>Password</label>
                     <input className="loginForm" type="password" name="pass" required />
                     {renderErrorMessage("pass")}
-                    <Link className="register" to ="/register">Create account</Link>
+                    <Link className="register" to="/register">Create account</Link>
                 </div>
                 <input type="submit" value="Login" />
                 <div className="button-container"></div>
