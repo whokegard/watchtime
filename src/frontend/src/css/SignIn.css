@@ -8,8 +8,6 @@
     background-color: #1d1d1d;
     color: #fff;
     height: 100vh;
-    margin-right: auto;
-    margin-left: auto;
 }
 
 .loginForm {
@@ -80,9 +78,8 @@ input[type="submit"]:hover {
     text-decoration: none;
     color: var(--btn-color-hover);
     font-size: 20px;
-    display: flex;
-    margin-right: auto;
     margin-left: auto;
+    margin-right: auto;
 }
 
 .register:hover {

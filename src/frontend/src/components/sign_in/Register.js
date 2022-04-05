@@ -1,7 +1,9 @@
 import {Input, Col, Form, Row, Button} from 'antd';
 import React from "react";
+import "./../../css/SignIn.css";
 import { useNavigate} from "react-router";
 import {registerAMember} from "../../client";
+import {Link} from "react-router-dom";
 
 
 const Register = () => {
@@ -17,7 +19,9 @@ const Register = () => {
         };
 
         return (
-            <div style={{marginTop: "5rem"}}>
+            <div className="signin">
+                <div className="login-form">
+                <div className="title">Register Account</div>
                 <Form layout="vertical"
                       onFinishFailed={onFinishFailed}
                       onFinish={onFinish}
@@ -75,16 +79,17 @@ const Register = () => {
                             </Form.Item>
                         </Col>
                     </Row>
+                            <Link className="register" to="/signin">Already got an account?</Link>
                     <Row>
                         <Col span={12}>
                             <Form.Item >
-                                <Button type="primary" htmlType="submit">
-                                    Submit
-                                </Button>
+                                <input type="submit" value="Register" />
+                                <div className="button-container"></div>
                             </Form.Item>
                         </Col>
                     </Row>
                 </Form>
+            </div>
             </div>
         );
     }
