@@ -29,4 +29,4 @@ export const registerAMember = member =>
         },
         method: 'POST',
         body: JSON.stringify(member)
-    })
+    });
