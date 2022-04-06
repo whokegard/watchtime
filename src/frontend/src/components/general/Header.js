@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, {useContext, useEffect} from "react";
 import { useState } from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -49,7 +49,7 @@ const Header = () => {
                             <Link className="link" to="/">
                                 Home
                             </Link>
-                            {!isLoggedIn ? (
+                            {isLoggedIn ? (
                                 <Link className="link" to="/explore">
                                     Explore
                                 </Link>
@@ -57,7 +57,7 @@ const Header = () => {
                                 <></>
                             )
                             }
-                            {!isLoggedIn ? (
+                            {isLoggedIn ? (
                                 <Link className="link" to="/profile">
                                     Profile
                                 </Link>

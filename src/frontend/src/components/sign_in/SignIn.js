@@ -23,7 +23,7 @@ const SignIn = () => {
     }, []);
 
     const fetchUsers = async () => {
-        const res = await fetch("http://localhost:8080/members");
+        const res = await fetch("http://localhost:5000/users");
         const data = res.json();
 
         return data;

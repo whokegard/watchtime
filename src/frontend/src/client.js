@@ -11,25 +11,16 @@ const checkStatus = response => {
 }
 
 export const getAMember = () =>
-    fetch("api/members/1")
+    fetch("api/members/13")
         .then(checkStatus);
 
 export const getAllOfAMembersMovies = () =>
     fetch("api/movies/1")
         .then(checkStatus);
 
-export const getAllOfAMembersSeries = () =>
-    fetch("api/series/1")
-        .then(checkStatus);
-
 export const getAMembersMoviePosters = () =>
-    fetch("api/movies/{1}/posters")
+    fetch("api/movies/{13}/posters")
         .then(checkStatus);
-
-export const getAMembersSeriesPosters = () =>
-    fetch("api/series/{1}/posters")
-        .then(checkStatus);
-
 
 export const registerAMember = member =>
     fetch("/api/members", {
@@ -47,13 +38,4 @@ export const addMovie = movie =>
         },
         method: 'POST',
         body: JSON.stringify(movie)
-    });
-
-export const addSeries = series =>
-    fetch("/api/series", {
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        method: 'POST',
-        body: JSON.stringify(series)
     });
