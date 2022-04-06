@@ -20,6 +20,7 @@ const MovieList = () => {
 
 
   return (
+      <div className="view">
       <div className="movie_list">
         <h5>Movies</h5>
         <Row xs={1} md={6} className="g-4">
@@ -34,6 +35,7 @@ const MovieList = () => {
              </Col>
           ))}
         </Row>
+      </div>
       </div>
 
 

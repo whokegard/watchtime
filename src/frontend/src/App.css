@@ -40,3 +40,7 @@ body {
   background: #1d1d1d;
 }
 
+.view {
+  height: 100vh;
+}
+

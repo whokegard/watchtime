@@ -4,7 +4,7 @@ import Card from "react-bootstrap/Card";
 import "./../../css/Cards.css";
 
 const Cards = () => {
-    const API_KEY = 'ce762116';
+    const API_KEY = "ba1855b1";
     const cards = [
         {
             id: 1,
@@ -44,6 +44,7 @@ const Cards = () => {
         },
     ];
     return (
+        <div className="view">
         <Row xs={1} md={3} className="g-4">
             {cards.map((card) => (
                 <Col
@@ -78,6 +79,7 @@ const Cards = () => {
                 </Col>
             ))}
         </Row>
+        </div>
     );
 };
 
