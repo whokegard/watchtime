@@ -29,6 +29,9 @@ input[type="submit"] {
     border: 2px solid var(--btn-color-hover);
     color: #fff;
     padding: 10px 20px;
+    display: flex;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 input[type="submit"]:hover {
@@ -75,6 +78,8 @@ input[type="submit"]:hover {
     text-decoration: none;
     color: var(--btn-color-hover);
     font-size: 20px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .register:hover {

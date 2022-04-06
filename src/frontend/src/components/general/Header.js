@@ -34,18 +34,10 @@ const Header = () => {
                 <Container fluid>
                     <Navbar.Brand href="/">
                         <img
-                            src="src/frontend/images/WatchTime_red.png"
+                            src="images/WatchTime_red.png"
                             alt="watchtime"
                             width="100%"
                             height="auto"
-                            className="d-inline-block align-top d-none d-sm-block"
-                        />
-                        <img
-                            src=""
-                            alt="logo"
-                            width="100%"
-                            height="auto"
-                            className="d-inline-block align-top d-sm-none"
                         />
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />

@@ -66,14 +66,8 @@ const Explore = () => {
                             style={{padding: "0"}}
                         >
                             {Array.from({ length: 1 }).map((_, idx) => (
-                                <div>
-                                <AiOutlinePlusSquare onClick={() => {addMovieOrTvShow(result)}} size={35} color={"var(--primary-color)"}
-                                                     style={{marginBottom: "-3rem",
-                                                         marginLeft: "-3px",
-                                                         position: "relative",
-                                                         zIndex: "2",
-                                                         cursor: "pointer",
-                                                        marginRight: "2rem"}}/>
+                                <div className="container"
+                                style={{position: "relative"}}>
                                     <Card
                                         style={{
                                             borderRadius: "5px",
@@ -83,15 +77,31 @@ const Explore = () => {
                                             background: "none",
                                         }}
                                     >
+                                <AiOutlinePlusSquare onClick={() => {addMovieOrTvShow(result)}} size={35} color={"var(--primary-color)"}
+                                                     style={{
+                                                         background: "rgba(211, 211, 211, 0.3)",
+                                                         position: "absolute",
+                                                         zIndex: "1",
+                                                         cursor: "pointer",
+                                                         top: "10%",
+                                                         left: "85%",
+                                                         transform: "translate(-50%, -50%)",
+                                                        }}/>
                                         <Card.Img
                                             style={{
                                                 height: "100%",
                                                 width: "100%",
                                             }}
                                             variant="top"
+                                            alt={result && result.Title}
                                             src={result && result.Poster}
                                             /*onClick={setShowDetail}*/
                                         />
+                                        <p
+                                        style={{
+                                            color: "white",
+                                            cursor: "pointer"
+                                        }}>{result.Title}</p>
                                     </Card>
                                 </div>
                             ))}
