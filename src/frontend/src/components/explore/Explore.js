@@ -5,6 +5,7 @@ import { AiOutlinePlusSquare } from 'react-icons/ai';
 import {Col, Row} from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import {addMovie} from "../../client";
+import "./../../css/Explore.css";
 import Button from "react-bootstrap/Button"
 
 const { Search } = Input;
@@ -43,10 +44,12 @@ const Explore = () => {
     };
 
     const searchFunction = (
-        <Search placeholder="input search text" onSearch={value => setQuery(value)} enterButton />
+        <Search placeholder="Search WatchTime" onSearch={value => setQuery(value)} enterButton />
     );
 
+
     return (
+        <div className="view">
         <div style={{margin: "5rem"}}>
             {searchFunction}
             <div className="search_list">
@@ -89,11 +92,7 @@ const Explore = () => {
                                             src={result && result.Poster}
                                             /*onClick={setShowDetail}*/
                                         />
-                                        <p
-                                        style={{
-                                            color: "white",
-                                            cursor: "pointer"
-                                        }}>{result.Title}</p>
+                                        <button className="button">{result.Title}</button>
                                     </Card>
                                 </div>
                             ))}
@@ -101,6 +100,7 @@ const Explore = () => {
                     ))}
                 </Row>
             </div>
+        </div>
         </div>
     );
 }
