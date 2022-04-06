@@ -1,13 +1,15 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import { Row, Col} from "react-bootstrap";
 import {getAllOfAMembersMovies} from "../../client";
+import { UserContext } from "../general/UserContext";
 import MovieCard from "./MovieCard";
 import "../../css/MovieList.css";
 
 const MovieList = () => {
   const [movies, setMovies] = useState([]);
+  const { user } = useContext(UserContext);
 
-  const fetchAMembersMovies = () => getAllOfAMembersMovies()
+  const fetchAMembersMovies = () => getAllOfAMembersMovies(user.watchlist_id)
       .then(resp => resp)
       .then(res => res.json())
       .then(data => setMovies(data));

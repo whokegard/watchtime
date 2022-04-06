@@ -10,16 +10,16 @@ const checkStatus = response => {
     return Promise.reject(error);
 }
 
-export const getAMember = () =>
-    fetch("api/members/13")
+export const getAMember = memberId =>
+    fetch(`/api/members/${memberId}`)
         .then(checkStatus);
 
-export const getAllOfAMembersMovies = () =>
-    fetch("api/movies/1")
+export const getAllOfAMembersMovies = watchlistId =>
+    fetch(`/api/movies/${watchlistId}`)
         .then(checkStatus);
 
-export const getAMembersMoviePosters = () =>
-    fetch("api/movies/{13}/posters")
+export const getAMembersMoviePosters = memberId =>
+    fetch(`/api/movies/${memberId}/posters`)
         .then(checkStatus);
 
 export const registerAMember = member =>
@@ -41,5 +41,5 @@ export const addMovie = movie =>
     });
 
 export const getMemberByUsernameAndPassword = (username, password) =>
-    fetch(`api/members/${username}/${password}`)
+    fetch(`/api/members/${username}/${password}`)
         .then(checkStatus);

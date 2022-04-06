@@ -7,7 +7,7 @@ import { getMemberByUsernameAndPassword } from "../../client";
 
 const SignIn = () => {
     const { setIsLoggedIn } = useContext(LoggedInContext);
-    const { setUser } = useContext(UserContext);
+    const { user, setUser }  = useContext(UserContext);
     const [errorMessages, setErrorMessages] = useState({});
     const [isSubmitted, setIsSubmitted] = useState(false);
     const navigate = useNavigate();
@@ -18,19 +18,21 @@ const SignIn = () => {
         notFound: "Invalid Username or Password",
     };
 
+    const getMember = async () => {
+        await getMemberByUsernameAndPassword(username, password)
+            .then(res => res.json())
+            .then(data => setUser(data));
+    }
+
     const handleSubmit = (event) => {
         //Prevent page reload
         event.preventDefault();
 
-        var { uname, pass } = document.forms[0];
+        getMember();
 
-
-        let member = getMemberByUsernameAndPassword(username, password);
-        if (member == null)
+        if (user == null)
             setErrorMessages({ name: "pass", message: errors.notFound });
         else {
-            setUser(member);
-            console.log(member);
             setIsLoggedIn(true);
             setIsSubmitted(true);
         }
