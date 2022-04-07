@@ -1,9 +1,9 @@
 package com.example.watchtime.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-
 import javax.persistence.*;
-import java.io.Serializable;
+import java.util.List;
 
 @ToString
 @Getter
@@ -16,15 +16,7 @@ import java.io.Serializable;
 public class Member {
 
     @Id
-    @Column
-    @SequenceGenerator(
-            name = "student_sequence",
-            sequenceName = "student_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            generator = "student_sequence",
-            strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private long member_id;
 
     @Column
@@ -41,4 +33,14 @@ public class Member {
 
     @Column
     private String password;
+
+    @Column
+    @ManyToMany
+    @JsonIgnore
+    private List<Movie> movie_list;
+
+    @Column
+    @ManyToMany
+    @JsonIgnore
+    private List<TVShow> tvshow_list;
 }

@@ -1,10 +1,11 @@
 package com.example.watchtime.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import javax.persistence.*;
+import java.util.List;
 
 @ToString
-@EqualsAndHashCode
 @Getter
 @Setter
 @NoArgsConstructor
@@ -15,24 +16,28 @@ public class Movie {
 
     @Id
     @Column
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private long movie_id;
 
     @Column
     private String imdb_id;
 
     @Column
-   /* @JoinColumn(name = "watchlist_id", referencedColumnName = "id")
-    @JsonIgnore*/
-    private int watchlist_id;
+    private String title;
 
     @Column
-    /*@JoinColumn(name = "rating_id", referencedColumnName = "id")
-    @JsonIgnore*/
-    private int rating_id;
+    private int year;
 
     @Column
-    /*@JoinColumn(name = "rating_id", referencedColumnName = "id")
-    @JsonIgnore*/
-    private byte isWatched;
+    private byte watched;
+
+    @Column
+    @ManyToMany
+    @JsonIgnore
+    private List<Member> member_list;
+
+    @Column
+    @ManyToMany
+    @JsonIgnore
+    private List<Rating> rating_list;
 }

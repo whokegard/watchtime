@@ -1,5 +1,6 @@
 package com.example.watchtime.model;
 
+import com.example.watchtime.model.enums.RatingEnum;
 import lombok.*;
 import javax.persistence.*;
 
@@ -14,10 +15,10 @@ import javax.persistence.*;
 public class Rating {
     @Id
     @Column
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue
+    private byte id;
 
     @Column
-    private String rating;
-
+    @Enumerated(EnumType.ORDINAL) //Kanske @Enumerated(EnumType.STRING)
+    private RatingEnum rating;
 }
