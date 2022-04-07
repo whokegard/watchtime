@@ -18,8 +18,8 @@ const SignIn = () => {
         notFound: "Invalid Username or Password",
     };
 
-    const getMember = async () => {
-        await getMemberByUsernameAndPassword(username, password)
+    const getMember = () => {
+        getMemberByUsernameAndPassword(username, password)
             .then(res => res.json())
             .then(data => setUser(data));
     }

@@ -27,12 +27,7 @@ public class MovieController {
     }
 
     @GetMapping("/{id}")
-    public List<Movie> getAllOfAMembersMovies(
-            @PathVariable("id") long watchlistId,
-            @PathParam("title") String title
-            ) {
-        if (title != null)
-            return movieService.getAMovieFromAMembersListByTitle(watchlistId, title);
+    public List<Movie> getAllOfAMembersMovies(@PathVariable("id") long watchlistId) {
         /*Member memberByID = memberService.getMemberByID(id);
         long watchlist_id = memberByID.getWatchlist_id();*/
 
@@ -42,6 +37,16 @@ public class MovieController {
     @DeleteMapping("/{movieId}")
     public void removeMovieFromAMembersList(@PathVariable("movieId") long movieId) {
         movieService.removeMovieFromAMembersList(movieId);
+    }
+
+    @GetMapping("/{id}/watched")
+    public List<Movie> getMembersWatchedMovies(@PathVariable("id") long watchlistId) {
+        return movieService.getMembersWatchedMovies(watchlistId);
+    }
+
+    @GetMapping("/{id}/notWatched")
+    public List<Movie> getMembersNonWatchedMovies(@PathVariable("id") long watchlistId) {
+        return movieService.getMembersNonWatchedMovies(watchlistId);
     }
 
     /*@GetMapping("/{id}/posters")
