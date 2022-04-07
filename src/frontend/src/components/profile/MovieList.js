@@ -16,6 +16,7 @@ const MovieList = () => {
 
   useEffect(() => {
     fetchAMembersMovies();
+    console.log(user.watchlist_id)
   }, [movies]);
 
 
