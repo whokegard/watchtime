@@ -1,11 +1,12 @@
 
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import { Input, Space } from 'antd';
 import { AiOutlinePlusSquare } from 'react-icons/ai';
 import {Col, Row} from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import {addMovie} from "../../client";
 import "./../../css/Explore.css";
+import {UserContext} from "../general/UserContext";
 import Button from "react-bootstrap/Button"
 
 const { Search } = Input;
@@ -16,10 +17,11 @@ const Explore = () => {
     const API_KEY = "ba1855b1";
     const [searchResult, setSearchResult] = useState(null);
     const [query, setQuery] = useState("");
+    const { user } = useContext(UserContext)
 
     const movie = {
         imdb_id: null,
-        watchlist_id: 1,
+        watchlist_id: user.watchlist_id,
         rating_id: null,
         watched_id: 0
     };

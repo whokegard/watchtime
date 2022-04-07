@@ -17,10 +17,6 @@ function App() {
     const [user, setUser] = useState({});
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    getAMember()
-        .then(res => res.json())
-        .then(console.log)
-
     return (
         <Router>
             <div className="App">

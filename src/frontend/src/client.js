@@ -61,3 +61,11 @@ export const addSeries = series =>
 export const getMemberByUsernameAndPassword = (username, password) =>
     fetch(`/api/members/${username}/${password}`)
         .then(checkStatus);
+
+export const getMembersNonWatchedMovies = watchlistId =>
+    fetch(`/api/movies/${watchlistId}/watched`)
+        .then(checkStatus);
+
+export const getMembersWatchedMovies = watchlistId =>
+    fetch(`/api/movies/${watchlistId}/notWatched`)
+        .then(checkStatus);

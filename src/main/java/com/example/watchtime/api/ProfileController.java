@@ -24,12 +24,9 @@ public class ProfileController {
 
     @GetMapping("/{id}")
     public List<Movie> getAllOfAMembersMovies(
-            @PathVariable("id") long id,
-            @PathParam("type") String type) {
+            @PathVariable("id") long id) {
         Member memberByID = memberService.getMemberByID(id);
         long watchlist_id = memberByID.getWatchlist_id();
-        if (type != null)
-            return movieService.getAllMoviesByType(watchlist_id, type);
 
         return movieService.getAllOfAMembersMoviesById(watchlist_id);
     }
