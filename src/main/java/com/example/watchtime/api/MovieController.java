@@ -22,35 +22,13 @@ public class MovieController {
 
 
     @PostMapping
-    public void addMovie(@RequestBody Movie newMovie) {
-        movieService.addMovie(newMovie);
+    public Movie addMovie(@RequestBody Movie newMovie) {
+        return movieService.addMovie(newMovie);
     }
 
-    @GetMapping("/{id}")
-    public List<Movie> getAllOfAMembersMovies(@PathVariable("id") long watchlistId) {
-        /*Member memberByID = memberService.getMemberByID(id);
-        long watchlist_id = memberByID.getWatchlist_id();*/
-
-        return movieService.getAllOfAMembersMovies(watchlistId);
+    @PutMapping("/{imdbId}/members/{id}")
+    public Movie addMemberToMovie( @PathVariable("imdbId") String imdbId,
+                                   @PathVariable("id") long memberId) {
+        return movieService.addMemberToMovie(imdbId, memberId);
     }
-
-    @DeleteMapping("/{movieId}")
-    public void removeMovieFromAMembersList(@PathVariable("movieId") long movieId) {
-        movieService.removeMovieFromAMembersList(movieId);
-    }
-
-    @GetMapping("/{id}/watched")
-    public List<Movie> getMembersWatchedMovies(@PathVariable("id") long watchlistId) {
-        return movieService.getMembersWatchedMovies(watchlistId);
-    }
-
-    @GetMapping("/{id}/notWatched")
-    public List<Movie> getMembersNonWatchedMovies(@PathVariable("id") long watchlistId) {
-        return movieService.getMembersNonWatchedMovies(watchlistId);
-    }
-
-    /*@GetMapping("/{id}/posters")
-    public List<String> allMoviePostersOfAMember(@PathVariable("id") long watchlistId) {
-        return movieService.getAllMoviePostersOfAMember(watchlistId);
-    }*/
 }

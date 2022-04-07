@@ -36,11 +36,9 @@ public class Member {
 
     @Column
     @ManyToMany
-    @JsonIgnore
     private List<Movie> movie_list;
 
     @Column
     @ManyToMany
-    @JsonIgnore
     private List<TVShow> tvshow_list;
 }

@@ -1,10 +1,13 @@
 package com.example.watchtime.api;
 
 import com.example.watchtime.model.Member;
+import com.example.watchtime.model.Movie;
 import com.example.watchtime.service.MemberService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
@@ -37,4 +40,25 @@ public class MemberController {
         memberService.deleteMemberById(id);
     }
 
+    /*@GetMapping("/{id}")
+    public List<Movie> getAMembersMovies(@PathVariable("id") long memberId) {
+
+        return memberService.getAMembersMovies(memberId);
+    }
+
+    @DeleteMapping("/{id}/movies/{imdbId}")
+    public void removeMovie(@PathVariable("id") long memberId,
+                            @PathVariable("imdbId") long imdbId) {
+        memberService.removeMovie(memberId, imdbId);
+    }
+
+    @GetMapping("/{id}/watched")
+    public List<Movie> getWatchedMovies(@PathVariable("id") long watchlistId) {
+        return memberService.getWatchedMovies(watchlistId);
+    }
+
+    @GetMapping("/{id}/notWatched")
+    public List<Movie> getNonWatchedMovies(@PathVariable("id") long watchlistId) {
+        return memberService.getNonWatchedMovies(watchlistId);
+    }*/
 }

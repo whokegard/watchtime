@@ -4,32 +4,36 @@ import { Input, Space } from 'antd';
 import { AiOutlinePlusSquare } from 'react-icons/ai';
 import {Col, Row} from "react-bootstrap";
 import Card from "react-bootstrap/Card";
-import {addMovie} from "../../client";
+import {addMovie, addMemberToMovie} from "../../client";
 import "./../../css/Explore.css";
 import {UserContext} from "../general/UserContext";
 import Button from "react-bootstrap/Button"
 
 const { Search } = Input;
-
-
-
 const Explore = () => {
+    const { user } = useContext(UserContext);
     const API_KEY = "ba1855b1";
     const [searchResult, setSearchResult] = useState(null);
     const [query, setQuery] = useState("");
-    const { user } = useContext(UserContext)
+    const [theMovie, setTheMovie] = useState({});
 
     const movie = {
         imdb_id: null,
-        watchlist_id: user.watchlist_id,
-        rating_id: null,
+        title: "",
+        year: 0,
         watched_id: 0
     };
 
     const addMovieOrTvShow = result => {
         if (result.Type === "movie") {
             movie.imdb_id = result.imdbID;
-            addMovie(movie);
+            movie.title = result.Title;
+            movie.year = result.Year;
+            addMovie(movie)
+                .then(res => res.json())
+                .then(data => setTheMovie(data));
+            console.log(theMovie);
+            addMemberToMovie(theMovie.imdb_id, user.member_id)
         }
         else if (result.Type === "series") {
         }

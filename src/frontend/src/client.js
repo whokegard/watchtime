@@ -7,6 +7,9 @@ const checkStatus = response => {
 
     const error = new Error(response.statusText);
     error.response = response;
+    response.json().then(e => {
+        error.error = e;
+    });
     return Promise.reject(error);
 }
 
@@ -26,10 +29,6 @@ export const getAMembersMoviePosters = memberId =>
     fetch(`/api/movies/${memberId}/posters`)
         .then(checkStatus);
 
-export const getAMembersSeriesPosters = () =>
-    fetch("api/series/{1}/posters")
-        .then(checkStatus);
-
 
 export const registerAMember = member =>
     fetch("/api/members", {
@@ -40,6 +39,10 @@ export const registerAMember = member =>
         body: JSON.stringify(member)
     });
 
+export const findMovieByImdbId = imdbId =>
+    fetch(`/api/movies/${imdbId}`)
+    .then(checkStatus);
+
 export const addMovie = movie =>
     fetch("/api/movies", {
         headers: {
@@ -48,6 +51,16 @@ export const addMovie = movie =>
         method: 'POST',
         body: JSON.stringify(movie)
     });
+
+export const addMemberToMovie = (imdbId, memberId) =>
+    fetch(`/api/movies/${imdbId}/members/${memberId}`, {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        method: 'PUT',
+        body: JSON.stringify(memberId)
+    })
+    .then(checkStatus);
 
 export const addSeries = series =>
     fetch("/api/series", {
