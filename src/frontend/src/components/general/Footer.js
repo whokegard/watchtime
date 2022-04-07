@@ -5,8 +5,7 @@ const Footer = () => {
     return (
         <div className="text-center" style={{
             background: "linear-gradient(#303030, #454545)" }}>
-            <Card.Body className="border-top border-secondary"
-            >
+            <Card.Body>
                 <Card.Text style={{
                     color: "var(--primary-color)"}}>
                     &copy; 2022 WatchTime<br></br> Privacy · Terms ·

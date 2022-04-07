@@ -3,6 +3,7 @@ package com.example.watchtime.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @ToString
 @Getter
@@ -23,19 +24,8 @@ public class Member {
     )
     @GeneratedValue(
             generator = "student_sequence",
-            strategy = GenerationType.SEQUENCE)
+            strategy = GenerationType.IDENTITY)
     private long member_id;
-
-    @Column
-    @SequenceGenerator(
-            name = "watchlist_sequence",
-            sequenceName = "watchlist_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            generator = "watchlist_sequence",
-            strategy = GenerationType.SEQUENCE)
-    private long watchlist_id;
 
     @Column
     private String username;

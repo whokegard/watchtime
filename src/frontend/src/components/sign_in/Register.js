@@ -29,7 +29,7 @@ const Register = () => {
                     <Row gutter={16}>
                         <Col span={12}>
                             <Form.Item
-                                name="firstName"
+                                name="first_name"
                                 label="First name"
                                 rules={[{required: true, message: 'Please enter your first name'}]}
                             >
@@ -38,7 +38,7 @@ const Register = () => {
                         </Col>
                         <Col span={12}>
                             <Form.Item
-                                name="lastName"
+                                name="last_name"
                                 label="Last name"
                                 rules={[{required: true, message: 'Please enter your last name'}]}
                             >

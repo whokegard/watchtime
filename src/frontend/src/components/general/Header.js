@@ -32,13 +32,15 @@ const Header = () => {
                 variant="dark"
             >
                 <Container fluid>
-                    <Navbar.Brand href="/">
+                    <Navbar.Brand>
+                        <Link className="link" to="/">
                         <img
                             src="images/WatchTime_red.png"
                             alt="watchtime"
                             width="100%"
                             height="auto"
                         />
+                        </Link>
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
