@@ -47,35 +47,37 @@ public class MemberService {
         return potentialMember.orElse(null);
     }
 
+    public List<Movie> getAMembersMovies(long memberId) {
+        return getMemberByID(memberId).getMovie_list();
+    }
 
-    /*public List<Movie> getMoviesById(long watchlist_id) {
+
+   /* public List<Movie> getMoviesById(long watchlist_id) {
         return getAllMovies().stream()
                 .filter(picture -> picture.getWatchlist_id() == watchlist_id)
                 .collect(Collectors.toList());
-    }
+    }*/
 
-    public List<Movie> getAMembersMovies(long memberId) {
+    /*public List<Movie> getAMembersMovies(long memberId) {
         return getMemberByID(memberId).getMovie_list();
                 .filter(movie -> movie.getWatchlist_id() == watchlist_id)
                 .collect(Collectors.toList());
-    }
-
-    public void removeMovie(long memberId, long imdbId) {
-        movieDAO.deleteMovieFromAMembersList(memberId, imdbId);
-    }
-
-    public List<Movie> getWatchedMovies(long watchlistId) {
-        return getAllMovies().stream()
-                .filter(movie -> movie.getWatchlist_id() == watchlistId)
-                .filter(movie -> movie.getIsWatched() == 1)
-                .collect(Collectors.toList());
-    }
-
-    public List<Movie> getNonWatchedMovies(long watchlistId) {
-        return getAllMovies().stream()
-                .filter(movie -> movie.getWatchlist_id() == watchlistId)
-                .filter(movie -> movie.getIsWatched() == 0)
-                .collect(Collectors.toList());
     }*/
+
+    /*public void removeMovie(long memberId, long imdbId) {
+        movieDAO.deleteMovieFromAMembersList(memberId, imdbId);
+    }*/
+
+    public List<Movie> getAMembersWatchedMovies(long memberId) {
+        return getAMembersMovies(memberId).stream()
+                .filter(movie -> movie.getWatched() == 1)
+                .collect(Collectors.toList());
+    }
+
+    public List<Movie> getAMembersNonWatchedMovies(long memberId) {
+        return getAMembersMovies(memberId).stream()
+                .filter(movie -> movie.getWatched() == 0)
+                .collect(Collectors.toList());
+    }
 
 }

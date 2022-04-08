@@ -39,14 +39,26 @@ public class MovieService {
         }
         Member member = maybeMember.get();
 
-        movie.getMember_list().add(member);
-        return movie;
+        List<Member> members = movie.getMember_list();
+        members.add(member);
+
+        List<Movie> movies = member.getMovie_list();
+        movies.add(movie);
+
+        movie.setMember_list(members);
+        member.setMovie_list(movies);
+        return movieDAO.save(movie);
     }
 
     private Movie findByImdbId(String imdbId) {
         return getAllMovies().stream()
                 .filter(movie -> movie.getImdb_id().equalsIgnoreCase(imdbId))
                 .findFirst().orElse(null);
+    }
+
+    public List<Member> getAllMembersOfAMovie(String imdbId) {
+        Movie movie = findByImdbId(imdbId);
+        return movie.getMember_list();
     }
 
     /*public List<String> getAllMoviePostersOfAMember(long watchlistId) {

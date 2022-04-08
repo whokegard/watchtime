@@ -17,8 +17,20 @@ export const getAMember = memberId =>
     fetch(`/api/members/${memberId}`)
         .then(checkStatus);
 
-export const getAllOfAMembersMovies = watchlistId =>
-    fetch(`/api/movies/${watchlistId}`)
+export const getMemberByUsernameAndPassword = (username, password) =>
+    fetch(`/api/members/${username}/${password}`)
+        .then(checkStatus);
+
+export const getMembersMovies = watchlistId =>
+    fetch(`/api/members/${watchlistId}`)
+        .then(checkStatus);
+
+export const getAMembersNonWatchedMovies = watchlistId =>
+    fetch(`/api/members/${watchlistId}/notWatched`)
+        .then(checkStatus);
+
+export const getAMembersWatchedMovies = watchlistId =>
+    fetch(`/api/members/${watchlistId}/watched`)
         .then(checkStatus);
 
 export const getAllOfAMembersSeries = () =>
@@ -71,14 +83,3 @@ export const addSeries = series =>
         body: JSON.stringify(series)
     });
 
-export const getMemberByUsernameAndPassword = (username, password) =>
-    fetch(`/api/members/${username}/${password}`)
-        .then(checkStatus);
-
-export const getMembersNonWatchedMovies = watchlistId =>
-    fetch(`/api/movies/${watchlistId}/watched`)
-        .then(checkStatus);
-
-export const getMembersWatchedMovies = watchlistId =>
-    fetch(`/api/movies/${watchlistId}/notWatched`)
-        .then(checkStatus);

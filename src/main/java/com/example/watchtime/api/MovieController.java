@@ -20,6 +20,11 @@ public class MovieController {
     @Autowired
     private final MovieService movieService;
 
+    @GetMapping
+    public List<Movie> getAllMovies() {
+        return movieService.getAllMovies();
+    }
+
 
     @PostMapping
     public Movie addMovie(@RequestBody Movie newMovie) {
@@ -30,5 +35,10 @@ public class MovieController {
     public Movie addMemberToMovie( @PathVariable("imdbId") String imdbId,
                                    @PathVariable("id") long memberId) {
         return movieService.addMemberToMovie(imdbId, memberId);
+    }
+
+    @GetMapping("/{imdbId}/members")
+    public List<Member> getAMembersMovies(@PathVariable("imdbId") String imdbId) {
+        return movieService.getAllMembersOfAMovie(imdbId);
     }
 }

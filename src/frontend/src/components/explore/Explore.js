@@ -1,5 +1,5 @@
 
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect, useState, useRef} from "react";
 import { Input, Space } from 'antd';
 import { AiOutlinePlusSquare } from 'react-icons/ai';
 import {Col, Row} from "react-bootstrap";
@@ -7,22 +7,30 @@ import Card from "react-bootstrap/Card";
 import {addMovie, addMemberToMovie} from "../../client";
 import "./../../css/Explore.css";
 import {UserContext} from "../general/UserContext";
-import Button from "react-bootstrap/Button"
 
 const { Search } = Input;
+
 const Explore = () => {
     const { user } = useContext(UserContext);
     const API_KEY = "ba1855b1";
     const [searchResult, setSearchResult] = useState(null);
     const [query, setQuery] = useState("");
     const [theMovie, setTheMovie] = useState({});
+    const isFirstRender = useRef(true);
 
     const movie = {
-        imdb_id: null,
+        imdb_id: "",
         title: "",
         year: 0,
         watched_id: 0
     };
+
+    useEffect(() => {
+        if (isFirstRender.current)
+            isFirstRender.current = false;
+        else
+            addMemberToMovie(theMovie.imdb_id, user.member_id)
+    }, [theMovie]);
 
     const addMovieOrTvShow = result => {
         if (result.Type === "movie") {
@@ -32,8 +40,6 @@ const Explore = () => {
             addMovie(movie)
                 .then(res => res.json())
                 .then(data => setTheMovie(data));
-            console.log(theMovie);
-            addMemberToMovie(theMovie.imdb_id, user.member_id)
         }
         else if (result.Type === "series") {
         }
@@ -46,8 +52,7 @@ const Explore = () => {
             setSearchResult(resultFromOMDB.Search);
         }
 
-        getSearchResult()
-        console.log(searchResult);
+        getSearchResult();
     }, [query]);
 
     const fetchSearchResult = async () => {

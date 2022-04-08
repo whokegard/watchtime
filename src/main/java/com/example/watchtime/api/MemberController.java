@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
-
 @RestController
 @RequestMapping("/api/members")
 @AllArgsConstructor
@@ -40,25 +38,25 @@ public class MemberController {
         memberService.deleteMemberById(id);
     }
 
-    /*@GetMapping("/{id}")
+    @GetMapping("/{id}/movies")
     public List<Movie> getAMembersMovies(@PathVariable("id") long memberId) {
 
         return memberService.getAMembersMovies(memberId);
     }
 
-    @DeleteMapping("/{id}/movies/{imdbId}")
+    /*@DeleteMapping("/{id}/movies/{imdbId}")
     public void removeMovie(@PathVariable("id") long memberId,
                             @PathVariable("imdbId") long imdbId) {
         memberService.removeMovie(memberId, imdbId);
-    }
+    }*/
 
     @GetMapping("/{id}/watched")
-    public List<Movie> getWatchedMovies(@PathVariable("id") long watchlistId) {
-        return memberService.getWatchedMovies(watchlistId);
+    public List<Movie> getAMembersWatchedMovies(@PathVariable("id") long memberId) {
+        return memberService.getAMembersWatchedMovies(memberId);
     }
 
     @GetMapping("/{id}/notWatched")
-    public List<Movie> getNonWatchedMovies(@PathVariable("id") long watchlistId) {
-        return memberService.getNonWatchedMovies(watchlistId);
-    }*/
+    public List<Movie> getMembersNonWatchedMovies(@PathVariable("id") long memberId) {
+        return memberService.getAMembersNonWatchedMovies(memberId);
+    }
 }
