@@ -45,18 +45,17 @@ public class MemberController {
         return memberService.getAMembersMovies(memberId);
     }
 
-    @PutMapping("/{id}/movies/{imdbId}")
     @GetMapping("/{id}/tvshows")
     public List<TVShow> getAMembersTVShows(@PathVariable("id") long memberId) {
 
         return memberService.getAMembersTVShows(memberId);
     }
 
-    /*@DeleteMapping("/{id}/movies/{imdbId}")
+    @PutMapping("/{id}/movies/{movieId}")
     public void removeMovie(@PathVariable("id") long memberId,
-                            @PathVariable("imdbId") long movieId) {
+                            @PathVariable("movieId") long movieId) {
         memberService.removeMovie(memberId, movieId);
-    }*/
+    }
 
     @GetMapping("/{id}/watchedMovies")
     public List<Movie> getAMembersWatchedMovies(@PathVariable("id") long memberId) {
