@@ -59,7 +59,7 @@ const MovieList = () => {
                  style={{padding: "0"}}
               >
                {Array.from({ length: 1 }).map((_, idx) => (
-                   <MovieCard key={movie.movie_id} imdbId={movie.imdb_id}/>
+                   <MovieCard  key={movie.movie_id} imdbId={movie.imdb_id}/>
                ))}
              </Col>
           ))}

@@ -45,6 +45,7 @@ public class MemberController {
         return memberService.getAMembersMovies(memberId);
     }
 
+    @PutMapping("/{id}/movies/{imdbId}")
     @GetMapping("/{id}/tvshows")
     public List<TVShow> getAMembersTVShows(@PathVariable("id") long memberId) {
 
@@ -53,8 +54,8 @@ public class MemberController {
 
     /*@DeleteMapping("/{id}/movies/{imdbId}")
     public void removeMovie(@PathVariable("id") long memberId,
-                            @PathVariable("imdbId") long imdbId) {
-        memberService.removeMovie(memberId, imdbId);
+                            @PathVariable("imdbId") long movieId) {
+        memberService.removeMovie(memberId, movieId);
     }*/
 
     @GetMapping("/{id}/watchedMovies")
