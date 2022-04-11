@@ -4,6 +4,7 @@ import com.example.watchtime.dao.MemberDAO;
 import com.example.watchtime.dao.MovieDAO;
 import com.example.watchtime.model.Member;
 import com.example.watchtime.model.Movie;
+import com.example.watchtime.model.TVShow;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -51,6 +52,10 @@ public class MemberService {
         return getMemberByID(memberId).getMovie_list();
     }
 
+    public List<TVShow> getAMembersTVShows(long memberId) {
+        return getMemberByID(memberId).getTvshow_list();
+    }
+
 
    /* public List<Movie> getMoviesById(long watchlist_id) {
         return getAllMovies().stream()
@@ -80,4 +85,15 @@ public class MemberService {
                 .collect(Collectors.toList());
     }
 
+    public List<TVShow> getAMembersWatchedTVShows(long memberId) {
+        return getAMembersTVShows(memberId).stream()
+                .filter(tvshow -> tvshow.getWatched() == 1)
+                .collect(Collectors.toList());
+    }
+
+    public List<TVShow> getMembersNonWatchedTVShows(long memberId) {
+        return getAMembersTVShows(memberId).stream()
+                .filter(tvshow -> tvshow.getWatched() == 0)
+                .collect(Collectors.toList());
+    }
 }

@@ -4,7 +4,7 @@ import { Input, Space } from 'antd';
 import { AiOutlinePlusSquare } from 'react-icons/ai';
 import {Col, Row} from "react-bootstrap";
 import Card from "react-bootstrap/Card";
-import {addMovie, addMemberToMovie} from "../../client";
+import {addMovie, addMemberToMovie, addTVShow, addMemberToTVShow} from "../../client";
 import "./../../css/Explore.css";
 import {UserContext} from "../general/UserContext";
 
@@ -16,21 +16,31 @@ const Explore = () => {
     const [searchResult, setSearchResult] = useState(null);
     const [query, setQuery] = useState("");
     const [theMovie, setTheMovie] = useState({});
+    const [theTVShow, setTheTVShow] = useState({});
     const isFirstRender = useRef(true);
 
     const movie = {
         imdb_id: "",
         title: "",
         year: 0,
-        watched_id: 0
+        watched: 0
+    };
+
+    const tvshow = {
+        imdb_id: "",
+        title: "",
+        year: 0,
+        watched: 0
     };
 
     useEffect(() => {
         if (isFirstRender.current)
             isFirstRender.current = false;
-        else
-            addMemberToMovie(theMovie.imdb_id, user.member_id)
-    }, [theMovie]);
+        else {
+            addMemberToMovie(theMovie.imdb_id, user.member_id);
+            addMemberToTVShow(theTVShow.imdb_id, user.member_id);
+        }
+    }, [theMovie], [theTVShow]);
 
     const addMovieOrTvShow = result => {
         if (result.Type === "movie") {
@@ -42,6 +52,12 @@ const Explore = () => {
                 .then(data => setTheMovie(data));
         }
         else if (result.Type === "series") {
+            tvshow.imdb_id = result.imdbID;
+            tvshow.title = result.Title;
+            tvshow.year = result.Year;
+            addTVShow(tvshow)
+                .then(res => res.json())
+                .then(data => setTheTVShow(data));
         }
     }
 
