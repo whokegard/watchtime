@@ -64,9 +64,34 @@ public class MemberService {
                 .collect(Collectors.toList());
     }*/
 
-    /*public void removeMovie(long memberId, long imdbId) {
-        movieDAO.deleteMovieFromAMembersList(memberId, imdbId);
-    }*/
+    public void removeMovie(long memberId, long movieId) {
+        /*Optional<Movie> maybeMemberMovie = getAMembersMovies(memberId).stream()
+                .filter(movie -> movie.getMovie_id() == (movieId))
+                .findFirst();*/
+
+        Optional<Member> maybeMember = memberDAO.findMemberByID(memberId);
+        Optional<Movie> maybeMovie = movieDAO.findMovieById(movieId);
+
+        if (maybeMovie.isEmpty() || maybeMember.isEmpty())
+            return;
+
+        Member member = maybeMember.get();
+        Movie movie = maybeMovie.get();
+
+        List<Movie> aMembersMovies = member.getMovie_list();
+        System.out.println(movie.getTitle());
+        aMembersMovies.remove(movie);
+
+        List<Member> movieMembers = movie.getMember_list();
+        System.out.println(member.getUsername());
+        movieMembers.remove(member);
+
+        member.setMovie_list(aMembersMovies);
+        movie.setMember_list(movieMembers);
+
+        memberDAO.saveMember(member);
+        movieDAO.save(movie);
+    }
 
     public List<Movie> getAMembersWatchedMovies(long memberId) {
         return getAMembersMovies(memberId).stream()
@@ -79,5 +104,4 @@ public class MemberService {
                 .filter(movie -> movie.getWatched() == 0)
                 .collect(Collectors.toList());
     }
-
 }
