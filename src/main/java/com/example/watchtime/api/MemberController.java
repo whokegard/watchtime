@@ -74,6 +74,26 @@ public class MemberController {
 
     @GetMapping("/{id}/notWatchedTVShows")
     public List<TVShow> getMembersNonWatchedTVShows(@PathVariable("id") long memberId) {
-        return memberService.getMembersNonWatchedTVShows(memberId);
+        return memberService.getAMembersNonWatchedTVShows(memberId);
+    }
+
+    @PutMapping("/{id}/movies/{movieId}/removeFromWatched")
+    public List<Movie> removeMovieFromWatchedList(@PathVariable("id") long memberId, @PathVariable("movieId") long movieId) {
+        return memberService.removeMovieFromWatchedList(memberId, movieId);
+    }
+
+    @PutMapping("/{id}/movies/{movieId}/addWatched")
+    public List<Movie> addMovieToWatchedList(@PathVariable("id") long memberId, @PathVariable("movieId") long movieId) {
+        return memberService.addMovieToWatchedList(memberId, movieId);
+    }
+
+    @PutMapping("/{id}/movies/{movieId}/removeFromWatched")
+    public List<TVShow> removeTVShowFromWatchedList(@PathVariable("id") long memberId, @PathVariable("movieId") long movieId) {
+        return memberService.removeTVShowFromWatchedList(memberId, movieId);
+    }
+
+    @PutMapping("/{id}/movies/{movieId}/addWatched")
+    public List<TVShow> addTVShowToWatchedList(@PathVariable("id") long memberId, @PathVariable("movieId") long movieId) {
+        return memberService.addTVShowToWatchedList(memberId, movieId);
     }
 }

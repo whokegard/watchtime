@@ -1,6 +1,5 @@
 package com.example.watchtime.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import javax.persistence.*;
 import java.util.List;
@@ -36,9 +35,17 @@ public class Member {
 
     @Column
     @ManyToMany
-    private List<Movie> movie_list;
+    private List<Movie> watched_movies;
 
     @Column
     @ManyToMany
-    private List<TVShow> tvshow_list;
+    private List<TVShow> watched_tvshows;
+
+    @Column
+    @ManyToMany
+    private List<Movie> unwatched_movies;
+
+    @Column
+    @ManyToMany
+    private List<TVShow> unwatched_tvshows;
 }

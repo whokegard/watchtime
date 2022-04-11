@@ -2,14 +2,16 @@ package com.example.watchtime.service;
 
 import com.example.watchtime.dao.MemberDAO;
 import com.example.watchtime.dao.MovieDAO;
+import com.example.watchtime.dao.TVShowDAO;
 import com.example.watchtime.model.Member;
 import com.example.watchtime.model.Movie;
 import com.example.watchtime.model.TVShow;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -17,7 +19,7 @@ public class MemberService {
 
     private final MemberDAO memberDAO;
     private final MovieDAO movieDAO;
-    private final TVShowService tvShowDAO;
+    private final TVShowDAO tvShowDAO;
 
     public void addMember(Member newMember) {
         memberDAO.saveMember(newMember);
@@ -49,25 +51,35 @@ public class MemberService {
     }
 
     public List<Movie> getAMembersMovies(long memberId) {
-        return getMemberByID(memberId).getMovie_list();
+        List<Movie> allOfAMembersMovies = new ArrayList<>();
+        Optional<Member> maybeMember = memberDAO.findMemberByID(memberId);
+
+        if (maybeMember.isEmpty())
+            return null;
+
+        Member member = maybeMember.get();
+
+
+        allOfAMembersMovies.addAll(member.getUnwatched_movies());
+        allOfAMembersMovies.addAll(member.getWatched_movies());
+
+        return allOfAMembersMovies;
     }
 
     public List<TVShow> getAMembersTVShows(long memberId) {
-        return getMemberByID(memberId).getTvshow_list();
+        List<TVShow> allOfAMembersTVShows = new ArrayList<>();
+        Optional<Member> maybeMember = memberDAO.findMemberByID(memberId);
+
+        if (maybeMember.isEmpty())
+            return null;
+
+        Member member = maybeMember.get();
+
+        allOfAMembersTVShows.addAll(member.getUnwatched_tvshows());
+        allOfAMembersTVShows.addAll(member.getWatched_tvshows());
+
+        return allOfAMembersTVShows;
     }
-
-
-   /* public List<Movie> getMoviesById(long watchlist_id) {
-        return getAllMovies().stream()
-                .filter(picture -> picture.getWatchlist_id() == watchlist_id)
-                .collect(Collectors.toList());
-    }*/
-
-    /*public List<Movie> getAMembersMovies(long memberId) {
-        return getMemberByID(memberId).getMovie_list();
-                .filter(movie -> movie.getWatchlist_id() == watchlist_id)
-                .collect(Collectors.toList());
-    }*/
 
     public void removeMovie(long memberId, long movieId) {
         Optional<Member> maybeMember = memberDAO.findMemberByID(memberId);
@@ -79,42 +91,203 @@ public class MemberService {
         Member member = maybeMember.get();
         Movie movie = maybeMovie.get();
 
-        List<Movie> aMembersMovies = member.getMovie_list();
-        System.out.println(movie.getTitle());
-        aMembersMovies.remove(movie);
+        List<Movie> aMembersUnwatchedMovies = member.getUnwatched_movies();
+        aMembersUnwatchedMovies.remove(movie);
+
+        List<Movie> aMembersWatchedMovies = member.getWatched_movies();
+        aMembersWatchedMovies.remove(movie);
 
         List<Member> movieMembers = movie.getMember_list();
-        System.out.println(member.getUsername());
         movieMembers.remove(member);
 
-        member.setMovie_list(aMembersMovies);
+        List<Member> watchedMembers = movie.getWatched();
+        watchedMembers.remove(member);
+
+        member.setUnwatched_movies(aMembersUnwatchedMovies);
+        member.setWatched_movies(aMembersWatchedMovies);
         movie.setMember_list(movieMembers);
+        movie.setWatched(watchedMembers);
 
         memberDAO.saveMember(member);
         movieDAO.save(movie);
     }
 
+    public void removeTVShow(long memberId, long tvShowId) {
+        Optional<Member> maybeMember = memberDAO.findMemberByID(memberId);
+        Optional<TVShow> maybeTVShow = tvShowDAO.findTVShowById(tvShowId);
+
+        if (maybeTVShow.isEmpty() || maybeMember.isEmpty())
+            return;
+
+        Member member = maybeMember.get();
+        TVShow tvShow = maybeTVShow.get();
+
+        List<TVShow> aMembersUnwatchedTVShows = member.getUnwatched_tvshows();
+        aMembersUnwatchedTVShows.remove(tvShow);
+
+        List<TVShow> aMembersWatchedTVShows = member.getWatched_tvshows();
+        aMembersWatchedTVShows.remove(tvShow);
+
+        List<Member> tvShowMembers = tvShow.getMember_list();
+        tvShowMembers.remove(member);
+
+        List<Member> watchedMembers = tvShow.getWatched();
+        watchedMembers.remove(member);
+
+        member.setUnwatched_tvshows(aMembersUnwatchedTVShows);
+        member.setWatched_tvshows(aMembersWatchedTVShows);
+        tvShow.setMember_list(tvShowMembers);
+        tvShow.setWatched(watchedMembers);
+
+        memberDAO.saveMember(member);
+        tvShowDAO.save(tvShow);
+    }
+
+
+
     public List<Movie> getAMembersWatchedMovies(long memberId) {
-        return getAMembersMovies(memberId).stream()
-                .filter(movie -> movie.getWatched() == 1)
-                .collect(Collectors.toList());
+        Optional<Member> maybeMember = memberDAO.findMemberByID(memberId);
+
+        if (maybeMember.isEmpty())
+            return null;
+
+        Member member = maybeMember.get();
+
+        return member.getWatched_movies();
     }
 
     public List<Movie> getAMembersNonWatchedMovies(long memberId) {
-        return getAMembersMovies(memberId).stream()
-                .filter(movie -> movie.getWatched() == 0)
-                .collect(Collectors.toList());
+        Optional<Member> maybeMember = memberDAO.findMemberByID(memberId);
+
+        if (maybeMember.isEmpty())
+            return null;
+
+        Member member = maybeMember.get();
+
+        return member.getUnwatched_movies();
     }
 
     public List<TVShow> getAMembersWatchedTVShows(long memberId) {
-        return getAMembersTVShows(memberId).stream()
-                .filter(tvshow -> tvshow.getWatched() == 1)
-                .collect(Collectors.toList());
+        Optional<Member> maybeMember = memberDAO.findMemberByID(memberId);
+
+        if (maybeMember.isEmpty())
+            return null;
+
+        Member member = maybeMember.get();
+
+        return member.getWatched_tvshows();
     }
 
-    public List<TVShow> getMembersNonWatchedTVShows(long memberId) {
-        return getAMembersTVShows(memberId).stream()
-                .filter(tvshow -> tvshow.getWatched() == 0)
-                .collect(Collectors.toList());
+    public List<TVShow> getAMembersNonWatchedTVShows(long memberId) {
+        Optional<Member> maybeMember = memberDAO.findMemberByID(memberId);
+
+        if (maybeMember.isEmpty())
+            return null;
+
+        Member member = maybeMember.get();
+
+        return member.getUnwatched_tvshows();
+    }
+
+    public List<Movie> addMovieToWatchedList(long memberId, long movieId) {
+        Optional<Member> maybeMember = memberDAO.findMemberByID(memberId);
+        Optional<Movie> maybeMovie = movieDAO.findMovieById(movieId);
+
+        if (maybeMember.isEmpty() || maybeMovie.isEmpty()) {
+            return null;
+        }
+
+        Member member = maybeMember.get();
+        Movie movie = maybeMovie.get();
+
+        List<Movie> watchedMovies = member.getWatched_movies();
+        watchedMovies.add(movie);
+
+        List<Member> watched = movie.getWatched();
+        watched.add(member);
+
+        member.getUnwatched_movies().remove(movie);
+
+        movieDAO.save(movie);
+        memberDAO.saveMember(member);
+
+        return member.getWatched_movies();
+    }
+
+    public List<Movie> removeMovieFromWatchedList(long memberId, long movieId) {
+        Optional<Member> maybeMember = memberDAO.findMemberByID(memberId);
+        Optional<Movie> maybeMovie = movieDAO.findMovieById(movieId);
+
+        if (maybeMember.isEmpty() || maybeMovie.isEmpty()) {
+            return null;
+        }
+
+        Member member = maybeMember.get();
+        Movie movie = maybeMovie.get();
+
+        List<Movie> watchedMovies = member.getWatched_movies();
+        watchedMovies.remove(movie);
+
+        List<Member> watched = movie.getWatched();
+        watched.remove(member);
+
+        List<Movie> unwatchedMovies = member.getUnwatched_movies();
+        unwatchedMovies.add(movie);
+
+        movieDAO.save(movie);
+        memberDAO.saveMember(member);
+
+        return member.getWatched_movies();
+    }
+
+    public List<TVShow> addTVShowToWatchedList(long memberId, long tvShowId) {
+        Optional<Member> maybeMember = memberDAO.findMemberByID(memberId);
+        Optional<TVShow> maybeTVShow = tvShowDAO.findTVShowById(tvShowId);
+
+        if (maybeMember.isEmpty() || maybeTVShow.isEmpty()) {
+            return null;
+        }
+
+        Member member = maybeMember.get();
+        TVShow tvShow = maybeTVShow.get();
+
+        List<TVShow> watchedTVShows = member.getWatched_tvshows();
+        watchedTVShows.add(tvShow);
+
+        List<Member> watched = tvShow.getWatched();
+        watched.add(member);
+
+        member.getUnwatched_tvshows().remove(tvShow);
+
+        tvShowDAO.save(tvShow);
+        memberDAO.saveMember(member);
+
+        return member.getWatched_tvshows();
+    }
+
+    public List<TVShow> removeTVShowFromWatchedList(long memberId, long tvShowId) {
+        Optional<Member> maybeMember = memberDAO.findMemberByID(memberId);
+        Optional<TVShow> maybeTVShow = tvShowDAO.findTVShowById(tvShowId);
+
+        if (maybeMember.isEmpty() || maybeTVShow.isEmpty()) {
+            return null;
+        }
+
+        Member member = maybeMember.get();
+        TVShow tvShow = maybeTVShow.get();
+
+        List<TVShow> watchedTVShows = member.getWatched_tvshows();
+        watchedTVShows.remove(tvShow);
+
+        List<Member> watched = tvShow.getWatched();
+        watched.remove(member);
+
+        List<TVShow> unwatchedTVShows = member.getUnwatched_tvshows();
+        unwatchedTVShows.add(tvShow);
+
+        tvShowDAO.save(tvShow);
+        memberDAO.saveMember(member);
+
+        return member.getUnwatched_tvshows();
     }
 }

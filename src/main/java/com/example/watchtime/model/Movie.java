@@ -29,7 +29,9 @@ public class Movie {
     private int year;
 
     @Column
-    private byte watched;
+    @ManyToMany
+    @JsonIgnore
+    private List<Member> watched;
 
     @Column
     @ManyToMany

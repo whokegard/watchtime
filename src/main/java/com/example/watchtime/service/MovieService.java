@@ -42,11 +42,11 @@ public class MovieService {
         List<Member> members = movie.getMember_list();
         members.add(member);
 
-        List<Movie> movies = member.getMovie_list();
+        List<Movie> movies = member.getUnwatched_movies();
         movies.add(movie);
 
         movie.setMember_list(members);
-        member.setMovie_list(movies);
+        member.setUnwatched_movies(movies);
         return movieDAO.save(movie);
     }
 
