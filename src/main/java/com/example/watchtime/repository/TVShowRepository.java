@@ -1,7 +1,7 @@
 package com.example.watchtime.repository;
 
 import com.example.watchtime.model.TVShow;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface TVShowRepository extends CrudRepository<TVShow, Long> {
+public interface TVShowRepository extends JpaRepository<TVShow, Long> {
 }

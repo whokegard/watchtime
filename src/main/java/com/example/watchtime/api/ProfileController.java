@@ -22,12 +22,12 @@ public class ProfileController {
     @Autowired
     private final MemberService memberService;
 
-    @GetMapping("/{id}")
+    /*@GetMapping("/{id}")
     public List<Movie> getAllOfAMembersMovies(
             @PathVariable("id") long id) {
         Member memberByID = memberService.getMemberByID(id);
         long watchlist_id = memberByID.getWatchlist_id();
 
         return movieService.getAllOfAMembersMoviesById(watchlist_id);
-    }
+    }*/
 }

@@ -1,5 +1,4 @@
 import "./App.css";
-import {getAllOfAMembersMovies, getAMember} from "./client";
 import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Routes, Link, Route } from "react-router-dom";

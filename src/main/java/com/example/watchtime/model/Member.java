@@ -16,7 +16,7 @@ import java.util.List;
 public class Member {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long member_id;
 
     @Column
@@ -36,11 +36,9 @@ public class Member {
 
     @Column
     @ManyToMany
-    @JsonIgnore
     private List<Movie> movie_list;
 
     @Column
     @ManyToMany
-    @JsonIgnore
     private List<TVShow> tvshow_list;
 }
