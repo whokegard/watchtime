@@ -70,10 +70,6 @@ public class MemberService {
     }*/
 
     public void removeMovie(long memberId, long movieId) {
-        /*Optional<Movie> maybeMemberMovie = getAMembersMovies(memberId).stream()
-                .filter(movie -> movie.getMovie_id() == (movieId))
-                .findFirst();*/
-
         Optional<Member> maybeMember = memberDAO.findMemberByID(memberId);
         Optional<Movie> maybeMovie = movieDAO.findMovieById(movieId);
 
