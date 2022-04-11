@@ -2,6 +2,7 @@ package com.example.watchtime.api;
 
 import com.example.watchtime.model.Member;
 import com.example.watchtime.model.Movie;
+import com.example.watchtime.model.TVShow;
 import com.example.watchtime.service.MemberService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,19 +45,35 @@ public class MemberController {
         return memberService.getAMembersMovies(memberId);
     }
 
-    @PutMapping("/{id}/movies/{imdbId}")
+    @GetMapping("/{id}/tvshows")
+    public List<TVShow> getAMembersTVShows(@PathVariable("id") long memberId) {
+
+        return memberService.getAMembersTVShows(memberId);
+    }
+
+    @PutMapping("/{id}/movies/{movieId}")
     public void removeMovie(@PathVariable("id") long memberId,
-                            @PathVariable("imdbId") long movieId) {
+                            @PathVariable("movieId") long movieId) {
         memberService.removeMovie(memberId, movieId);
     }
 
-    @GetMapping("/{id}/watched")
+    @GetMapping("/{id}/watchedMovies")
     public List<Movie> getAMembersWatchedMovies(@PathVariable("id") long memberId) {
         return memberService.getAMembersWatchedMovies(memberId);
     }
 
-    @GetMapping("/{id}/notWatched")
+    @GetMapping("/{id}/watchedTVShows")
+    public List<TVShow> getAMembersWatchedTVShows(@PathVariable("id") long memberId) {
+        return memberService.getAMembersWatchedTVShows(memberId);
+    }
+
+    @GetMapping("/{id}/notWatchedMovies")
     public List<Movie> getMembersNonWatchedMovies(@PathVariable("id") long memberId) {
         return memberService.getAMembersNonWatchedMovies(memberId);
+    }
+
+    @GetMapping("/{id}/notWatchedTVShows")
+    public List<TVShow> getMembersNonWatchedTVShows(@PathVariable("id") long memberId) {
+        return memberService.getMembersNonWatchedTVShows(memberId);
     }
 }

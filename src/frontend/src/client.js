@@ -21,20 +21,24 @@ export const getMemberByUsernameAndPassword = (username, password) =>
     fetch(`/api/members/${username}/${password}`)
         .then(checkStatus);
 
-export const getMembersMovies = watchlistId =>
-    fetch(`/api/members/${watchlistId}`)
+export const getMembersMovies = memberId =>
+    fetch(`/api/members/${memberId}`)
         .then(checkStatus);
 
-export const getAMembersNonWatchedMovies = watchlistId =>
-    fetch(`/api/members/${watchlistId}/notWatched`)
+export const getAMembersNonWatchedMovies = memberId =>
+    fetch(`/api/members/${memberId}/notWatchedMovies`)
         .then(checkStatus);
 
-export const getAMembersWatchedMovies = watchlistId =>
-    fetch(`/api/members/${watchlistId}/watched`)
+export const getAMembersWatchedMovies = memberId =>
+    fetch(`/api/members/${memberId}/watchedMovies`)
         .then(checkStatus);
 
-export const getAllOfAMembersSeries = () =>
-    fetch("api/series/1")
+export const getAMembersNonWatchedTVShows = memberId =>
+    fetch(`/api/members/${memberId}/notWatchedTVShows`)
+        .then(checkStatus);
+
+export const getAMembersWatchedTVShows = memberId =>
+    fetch(`/api/members/${memberId}/watchedTVShows`)
         .then(checkStatus);
 
 export const getAMembersMoviePosters = memberId =>
@@ -74,12 +78,22 @@ export const addMemberToMovie = (imdbId, memberId) =>
     })
     .then(checkStatus);
 
-export const addSeries = series =>
-    fetch("/api/series", {
+export const addMemberToTVShow = (imdbId, memberId) =>
+    fetch(`/api/tvshow/${imdbId}/members/${memberId}`, {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        method: 'PUT',
+        body: JSON.stringify(memberId)
+    })
+        .then(checkStatus);
+
+export const addTVShow = tvshow =>
+    fetch("/api/tvshow", {
         headers: {
             'Content-Type': 'application/json'
         },
         method: 'POST',
-        body: JSON.stringify(series)
+        body: JSON.stringify(tvshow)
     });
 

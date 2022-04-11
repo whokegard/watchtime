@@ -1,5 +1,6 @@
 package com.example.watchtime.dao;
 
+import com.example.watchtime.model.Movie;
 import com.example.watchtime.model.TVShow;
 import com.example.watchtime.repository.TVShowRepository;
 import lombok.AllArgsConstructor;
@@ -11,15 +12,19 @@ import java.util.Optional;
 public class TVShowDAO {
     private final TVShowRepository tvShowRepository;
 
-    public Optional<TVShow> findTVShowById(Long id) {
-        return tvShowRepository.findById(id);
+    public TVShow save(TVShow newTVShow) {
+        return tvShowRepository.save(newTVShow);
     }
 
-    public void deleteById(long member_id, long tvshow_id) {
-        tvShowRepository.deleteById(tvshow_id);
+    public Iterable<TVShow> findAllTVShows() {
+        return tvShowRepository.findAll();
     }
 
-    public void deleteAllTVShows() {
-        tvShowRepository.deleteAll();
+    public void deleteMovieFromAMembersList(long tvshowId) {
+        tvShowRepository.deleteById(tvshowId);
+    }
+
+    public Optional<TVShow> findTVShowById(long tvshowId) {
+        return tvShowRepository.findById(tvshowId);
     }
 }
