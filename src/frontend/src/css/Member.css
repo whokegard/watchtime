@@ -1,0 +1,31 @@
+.member-button {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    cursor: pointer;
+    font-size: 15px;
+    background: var(--primary-color);
+    border: 2px solid var(--btn-color-hover);
+    color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.member-button:hover {
+    background: var(--btn-color-hover);
+}
+
+.user-details {
+    justify-content: center;
+    text-align: center;
+}
+
+.user-details h1 {
+    color: #fff;
+}
+
+.user-details h3 {
+    color: #fff;
+}

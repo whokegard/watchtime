@@ -11,6 +11,7 @@ import Register from "./components/sign_in/Register";
 import Explore from "./components/explore/Explore"
 import { LoggedInContext } from "./components/general/LoggedInContext";
 import { UserContext } from "./components/general/UserContext";
+import Member from "./components/sign_in/Member";
 
 function App() {
     const [user, setUser] = useState({});
@@ -28,6 +29,14 @@ function App() {
                                 element={
                                     <>
                                         <Home />
+                                    </>
+                                }
+                            />
+                            <Route
+                                path="/member"
+                                element={
+                                    <>
+                                        <Member />
                                     </>
                                 }
                             />

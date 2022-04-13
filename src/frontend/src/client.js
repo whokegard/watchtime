@@ -55,6 +55,15 @@ export const registerAMember = member =>
         body: JSON.stringify(member)
     });
 
+export const deleteMemberById = memberId =>
+    fetch(`/api/members/${memberId}`, {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        method: 'DELETE',
+        body: JSON.stringify(memberId)
+    });
+
 export const findMovieByImdbId = imdbId =>
     fetch(`/api/movies/${imdbId}`)
     .then(checkStatus);
