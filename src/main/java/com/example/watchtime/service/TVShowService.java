@@ -3,7 +3,6 @@ package com.example.watchtime.service;
 import com.example.watchtime.dao.MemberDAO;
 import com.example.watchtime.dao.TVShowDAO;
 import com.example.watchtime.model.Member;
-import com.example.watchtime.model.Movie;
 import com.example.watchtime.model.TVShow;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -42,17 +41,17 @@ public class TVShowService {
         List<Member> members = tvshow.getMember_list();
         members.add(member);
 
-        List<TVShow> tvshows = member.getTvshow_list();
-        tvshows.add(tvshow);
+        List<TVShow> tvShows = member.getUnwatched_tvshows();
+        tvShows.add(tvshow);
 
         tvshow.setMember_list(members);
-        member.setTvshow_list(tvshows);
+        member.setUnwatched_tvshows(tvShows);
         return tvShowDAO.save(tvshow);
     }
 
     private TVShow findByImdbId(String imdbId) {
         return getAllTVShows().stream()
-                .filter(tvshow -> tvshow.getImdb_id().equalsIgnoreCase(imdbId))
+                .filter(tvShow -> tvShow.getImdb_id().equalsIgnoreCase(imdbId))
                 .findFirst().orElse(null);
     }
 

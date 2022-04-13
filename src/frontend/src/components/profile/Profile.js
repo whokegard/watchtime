@@ -1,5 +1,4 @@
-import React, {useState, useEffect} from "react";
-import data from "bootstrap/js/src/dom/data";
+import React from "react";
 import MovieList from "./MovieList";
 import TVShowList from "./TVShowList";
 

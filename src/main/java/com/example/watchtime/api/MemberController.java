@@ -7,7 +7,6 @@ import com.example.watchtime.service.MemberService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -87,13 +86,13 @@ public class MemberController {
         return memberService.addMovieToWatchedList(memberId, movieId);
     }
 
-    @PutMapping("/{id}/movies/{movieId}/removeFromWatched")
-    public List<TVShow> removeTVShowFromWatchedList(@PathVariable("id") long memberId, @PathVariable("movieId") long movieId) {
-        return memberService.removeTVShowFromWatchedList(memberId, movieId);
+    @PutMapping("/{id}/tvShow/{tvShowId}/removeFromWatched")
+    public List<TVShow> removeTVShowFromWatchedList(@PathVariable("id") long memberId, @PathVariable("tvShowId") long tvShowId) {
+        return memberService.removeTVShowFromWatchedList(memberId, tvShowId);
     }
 
-    @PutMapping("/{id}/movies/{movieId}/addWatched")
-    public List<TVShow> addTVShowToWatchedList(@PathVariable("id") long memberId, @PathVariable("movieId") long movieId) {
-        return memberService.addTVShowToWatchedList(memberId, movieId);
+    @PutMapping("/{id}/tvShow/{tvShowId}/addWatched")
+    public List<TVShow> addTVShowToWatchedList(@PathVariable("id") long memberId, @PathVariable("tvShowId") long tvShowId) {
+        return memberService.addTVShowToWatchedList(memberId, tvShowId);
     }
 }

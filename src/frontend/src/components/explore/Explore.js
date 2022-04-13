@@ -1,6 +1,6 @@
 
 import React, {useContext, useEffect, useState, useRef} from "react";
-import { Input, Space } from 'antd';
+import { Input, Space, Modal } from 'antd';
 import { AiOutlinePlusSquare } from 'react-icons/ai';
 import {Col, Row} from "react-bootstrap";
 import Card from "react-bootstrap/Card";

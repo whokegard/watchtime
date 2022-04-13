@@ -2,8 +2,8 @@ import React, {useContext, useEffect, useState} from "react";
 import { Row, Col} from "react-bootstrap";
 import {getAMembersWatchedMovies, getAMembersNonWatchedMovies} from "../../client";
 import { UserContext } from "../general/UserContext";
-import MovieCard from "./MovieCard";
 import "../../css/MovieList.css";
+import MovieCard from "./MovieCard";
 
 const MovieList = () => {
   const [watchedMovies, setWatchedMovies] = useState([]);
@@ -59,7 +59,7 @@ const MovieList = () => {
                  style={{padding: "0"}}
               >
                {Array.from({ length: 1 }).map((_, idx) => (
-                   <MovieCard  key={movie.movie_id} imdbId={movie.imdb_id}/>
+                   <MovieCard key={movie.movie_id} imdbId={movie.imdb_id}/>
                ))}
              </Col>
           ))}
