@@ -16,7 +16,6 @@ const ColCardBox = ({Title, imdbID, Poster, ShowDetail, DetailRequest, ActivateM
             .then(data => {
                 DetailRequest(false);
                 ShowDetail(data);
-                console.log(data);
             })
             .catch(({message}) => {
                 DetailRequest(false);
@@ -31,6 +30,7 @@ const ColCardBox = ({Title, imdbID, Poster, ShowDetail, DetailRequest, ActivateM
                     height: "auto",
                     width: "20vh",
                     background: "none",
+                    cursor: "pointer"
                 }}
                 onClick={() => clickHandler()}
             >

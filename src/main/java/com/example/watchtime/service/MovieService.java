@@ -22,7 +22,7 @@ public class MovieService {
         Movie movie = findByImdbId(newMovie.getImdb_id());
 
         if (movie != null)
-            return null;
+            return movie;
 
         return movieDAO.save(newMovie);
     }

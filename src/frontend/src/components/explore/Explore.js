@@ -49,7 +49,9 @@ const Explore = () => {
             movie.year = result.Year;
             addMovie(movie)
                 .then(res => res.json())
-                .then(data => setTheMovie(data));
+                .then(data => {
+                    setTheMovie(data)
+                });
         }
         else if (result.Type === "series") {
             tvshow.imdb_id = result.imdbID;
