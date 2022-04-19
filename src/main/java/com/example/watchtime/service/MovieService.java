@@ -16,28 +16,26 @@ public class MovieService {
     private final MovieDAO movieDAO;
     private final MemberDAO memberDAO;
 
-    //private final OMDBController omdbController;
-
     public Movie addMovie(Movie newMovie) {
         Movie movie = findByImdbId(newMovie.getImdb_id());
 
-        if (movie != null)
+        if (movie != null) {
             return movie;
+        }
 
         return movieDAO.save(newMovie);
     }
 
-    public List<Movie> getAllMovies() {
-        return (List<Movie>) movieDAO.findAllMovies();
-    }
 
-    public Movie addMemberToMovie(String imdbId, long memberId) {
-        Movie movie = findByImdbId(imdbId);
+    public Movie addMemberToMovie(long movieId, long memberId) {
+        Optional<Movie> maybeMovie = movieDAO.findMovieById(movieId);
         Optional<Member> maybeMember = memberDAO.findMemberByID(memberId);
-        if (maybeMember.isEmpty()) {
+        if (maybeMember.isEmpty() || maybeMovie.isEmpty()) {
             return null;
         }
+
         Member member = maybeMember.get();
+        Movie movie = maybeMovie.get();
 
         List<Member> members = movie.getMember_list();
         members.add(member);
@@ -53,21 +51,11 @@ public class MovieService {
     private Movie findByImdbId(String imdbId) {
         return getAllMovies().stream()
                 .filter(movie -> movie.getImdb_id().equalsIgnoreCase(imdbId))
-                .findFirst().orElse(null);
+                .findFirst()
+                .orElse(null);
     }
 
-    public List<Member> getAllMembersOfAMovie(String imdbId) {
-        Movie movie = findByImdbId(imdbId);
-        return movie.getMember_list();
+    private List<Movie> getAllMovies() {
+        return (List<Movie>) movieDAO.findAllMovies();
     }
-
-    /*public List<String> getAllMoviePostersOfAMember(long watchlistId) {
-        List<Movie> allMovies = getAllOfAMembersMovies(watchlistId);
-        List<String> posters = new ArrayList<>();
-        for (Movie m : allMovies) {
-            posters.add(omdbController.getPoster(m.getTitle(), m.getYear()));
-        }
-
-        return posters;
-    }*/
 }

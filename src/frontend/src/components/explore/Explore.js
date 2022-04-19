@@ -29,7 +29,7 @@ const Explore = () => {
     const tvshow = {
         imdb_id: "",
         title: "",
-        year: 0,
+        year: "",
         watched: 0
     };
 
@@ -37,10 +37,17 @@ const Explore = () => {
         if (isFirstRender.current)
             isFirstRender.current = false;
         else {
-            addMemberToMovie(theMovie.imdb_id, user.member_id);
-            addMemberToTVShow(theTVShow.imdb_id, user.member_id);
+            addMemberToMovie(theMovie.movie_id, user.member_id);
         }
-    }, [theMovie], [theTVShow]);
+    }, [theMovie]);
+
+    useEffect(() => {
+        if (isFirstRender.current)
+            isFirstRender.current = false;
+        else {
+            addMemberToTVShow(theTVShow.tvshow_id, user.member_id);
+        }
+    }, [theTVShow]);
 
     const addMovieOrTvShow = result => {
         if (result.Type === "movie") {
@@ -90,7 +97,6 @@ const Explore = () => {
         <div style={{margin: "5rem"}}>
             {searchFunction}
             <div className="search_list">
-                <h5>Result</h5>
                 <Row xs={1} md={6} className="g-4">
                     {searchResult != null && searchResult.length > 0 && searchResult.map((result, index) => (
                         <Col
@@ -99,7 +105,7 @@ const Explore = () => {
                         >
                             {Array.from({ length: 1 }).map((_, idx) => (
                                 <div className="container"
-                                style={{position: "relative"}}>
+                                style={{position: "relative", marginTop: "2rem"}}>
                                     <Card
                                         style={{
                                             borderRadius: "5px",

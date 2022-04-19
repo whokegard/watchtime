@@ -37,9 +37,4 @@ public class Movie {
     @ManyToMany
     @JsonIgnore
     private List<Member> member_list;
-
-    @Column
-    @ManyToMany
-    @JsonIgnore
-    private List<Rating> rating_list;
 }

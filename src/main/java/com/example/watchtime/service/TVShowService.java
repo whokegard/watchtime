@@ -30,13 +30,14 @@ public class TVShowService {
         return (List<TVShow>) tvShowDAO.findAllTVShows();
     }
 
-    public TVShow addMemberToTVShow(String imdbId, long memberId) {
-        TVShow tvshow = findByImdbId(imdbId);
+    public TVShow addMemberToTVShow(long tvshowId, long memberId) {
+        Optional<TVShow> maybeTvshow = tvShowDAO.findTVShowById(tvshowId);
         Optional<Member> maybeMember = memberDAO.findMemberByID(memberId);
-        if (maybeMember.isEmpty()) {
+        if (maybeMember.isEmpty() || maybeTvshow.isEmpty()) {
             return null;
         }
         Member member = maybeMember.get();
+        TVShow tvshow = maybeTvshow.get();
 
         List<Member> members = tvshow.getMember_list();
         members.add(member);
@@ -53,10 +54,5 @@ public class TVShowService {
         return getAllTVShows().stream()
                 .filter(tvShow -> tvShow.getImdb_id().equalsIgnoreCase(imdbId))
                 .findFirst().orElse(null);
-    }
-
-    public List<Member> getAllMembersOfATVShow(String imdbId) {
-        TVShow tvshow = findByImdbId(imdbId);
-        return tvshow.getMember_list();
     }
 }
