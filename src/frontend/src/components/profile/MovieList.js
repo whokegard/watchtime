@@ -4,6 +4,7 @@ import {getAMembersWatchedMovies, getAMembersNonWatchedMovies} from "../../clien
 import { UserContext } from "../general/UserContext";
 import "../../css/MovieList.css";
 import MovieCard from "./MovieCard";
+import EmptyCard from "./EmptyCard";
 
 const MovieList = () => {
     const [watchedMovies, setWatchedMovies] = useState([]);
@@ -49,41 +50,53 @@ const MovieList = () => {
             <div className="movie_list">
                 <h5>Not Watched Movies</h5>
                 <Row xs={1} md={6} className="g-4">
-                    {nonWatchedMovies.map((movie, index) => (
-                        <Col
-                            key={index}
-                            style={{padding: "0"}}
-                        >
-                            {Array.from({ length: 1 }).map((data, index) => (
-                                <MovieCard
-                                    key={index}
-                                    watched={false}
-                                    imdbId={movie.imdb_id}
-                                    movieId={movie.movie_id}
-                                    childToParent={childToParent}
-                                />
-                            ))}
+                    {nonWatchedMovies.length !== 0 ?
+                        nonWatchedMovies.map((movie, index) => (
+                            <Col
+                                key={index}
+                                style={{padding: "0"}}
+                            >
+                                {Array.from({length: 1}).map((data, index) => (
+                                    <MovieCard
+                                        key={index}
+                                        watched={false}
+                                        imdbId={movie.imdb_id}
+                                        movieId={movie.movie_id}
+                                        childToParent={childToParent}
+                                    />
+                                ))}
+                            </Col>
+                        ))
+                        :
+                        <Col>
+                            <EmptyCard />
                         </Col>
-                    ))}
+                    }
                 </Row>
                 <h5 style={{paddingTop: "2rem"}}>Watched Movies</h5>
                 <Row xs={1} md={6} className="g-4">
-                    {watchedMovies.map((movie, index) => (
-                        <Col
-                            key={index}
-                            style={{padding: "0"}}
-                        >
-                            {Array.from({ length: 1 }).map((data, index) => (
-                                <MovieCard
-                                    key={index}
-                                    imdbId={movie.imdb_id}
-                                    watched={true}
-                                    movieId={movie.movie_id}
-                                    childToParent={childToParent}
-                                />
-                            ))}
+                    {watchedMovies.length !== 0 ?
+                        watchedMovies.map((movie, index) => (
+                            <Col
+                                key={index}
+                                style={{padding: "0"}}
+                            >
+                                {Array.from({length: 1}).map((data, index) => (
+                                    <MovieCard
+                                        key={index}
+                                        imdbId={movie.imdb_id}
+                                        watched={true}
+                                        movieId={movie.movie_id}
+                                        childToParent={childToParent}
+                                    />
+                                ))}
+                            </Col>
+                        ))
+                        :
+                        <Col>
+                            <EmptyCard />
                         </Col>
-                    ))}
+                    }
                 </Row>
             </div>
         </div>
