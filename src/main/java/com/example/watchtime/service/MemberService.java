@@ -7,6 +7,7 @@ import com.example.watchtime.model.Member;
 import com.example.watchtime.model.Movie;
 import com.example.watchtime.model.TVShow;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
