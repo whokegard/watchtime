@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect, useRef, useState} from "react";
 import { Row, Col} from "react-bootstrap";
 import {getAMembersWatchedMovies, getAMembersNonWatchedMovies} from "../../client";
 import { UserContext } from "../general/UserContext";
@@ -9,6 +9,16 @@ const MovieList = () => {
   const [watchedMovies, setWatchedMovies] = useState([]);
   const [nonWatchedMovies, setNonWatchedMovies] = useState([]);
   const { user } = useContext(UserContext);
+  const watchedUpdate = useRef(true);
+  const unwatchedUpdate = useRef(true);
+
+    const childToParent = (updateLists) => {
+        if (updateLists === true) {
+            console.log("yello")
+            watchedUpdate.current = true;
+            unwatchedUpdate.current = true;
+        }
+    };
 
   const fetchAMembersWatchedMovies = () => getAMembersWatchedMovies(user.member_id)
       .then(resp => resp)
@@ -19,8 +29,11 @@ const MovieList = () => {
       });
 
   useEffect(() => {
-    fetchAMembersWatchedMovies();
-  }, []);
+      if (watchedUpdate.current) {
+          fetchAMembersWatchedMovies();
+          watchedUpdate.current = false;
+      }
+  }, [watchedUpdate]);
 
   const fetchAMembersNonWatchedMovies = () => getAMembersNonWatchedMovies(user.member_id)
       .then(resp => resp)
@@ -31,8 +44,11 @@ const MovieList = () => {
       });
 
   useEffect(() => {
-    fetchAMembersNonWatchedMovies();
-  }, []);
+      if (unwatchedUpdate.current) {
+          fetchAMembersNonWatchedMovies();
+          unwatchedUpdate.current = false;
+      }
+  }, [unwatchedUpdate]);
 
 
   return (
@@ -46,7 +62,13 @@ const MovieList = () => {
                       style={{padding: "0"}}
                   >
                       {Array.from({ length: 1 }).map((_, idx) => (
-                          <MovieCard key={movie.movie_id} imdbId={movie.imdb_id}/>
+                          <MovieCard
+                              key={movie.movie_id}
+                              watched={false}
+                              imdbId={movie.imdb_id}
+                              movieId={movie.movie_id}
+                              childToParent={childToParent}
+                          />
                       ))}
                   </Col>
               ))}
@@ -59,7 +81,13 @@ const MovieList = () => {
                  style={{padding: "0"}}
               >
                {Array.from({ length: 1 }).map((_, idx) => (
-                   <MovieCard key={movie.movie_id} imdbId={movie.imdb_id}/>
+                   <MovieCard
+                       key={movie.movie_id}
+                       imdbId={movie.imdb_id}
+                       watched={true}
+                       movieId={movie.movie_id}
+                       childToParent={childToParent}
+                   />
                ))}
              </Col>
           ))}

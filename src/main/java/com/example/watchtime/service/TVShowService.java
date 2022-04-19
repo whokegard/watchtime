@@ -21,7 +21,7 @@ public class TVShowService {
         TVShow tvshow = findByImdbId(newTVShow.getImdb_id());
 
         if (tvshow != null)
-            return null;
+            return tvshow;
 
         return tvShowDAO.save(newTVShow);
     }

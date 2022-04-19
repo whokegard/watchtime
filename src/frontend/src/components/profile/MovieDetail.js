@@ -1,9 +1,39 @@
-import React from "react";
-import {Col, Row, Tag} from "antd";
+import React, {useContext, useState} from "react";
+import {Col, Row, Tag, Typography } from "antd";
+import {PlusCircleOutlined, CheckCircleOutlined, MinusCircleOutlined} from "@ant-design/icons";
+import {addMovieToWatchedList, removeMovieFromWatchedList, removeMovie} from "../../client";
+import {UserContext} from "../general/UserContext";
 
-const MovieDetail = ({Title, Poster, imdbId, imdbRating, Rated, Runtime, Genre, Plot}) => {
+const TextTitle = Typography.Title;
+
+const MovieDetail = ({childToParent, watched, movieId, Title, Poster, imdbRating, Rated, Runtime, Genre, Plot}) => {
+    const { user }  = useContext(UserContext);
+
+
+    const onAdd = () => {
+        addMovieToWatchedList(user.member_id, movieId)
+            .then(res => res.json())
+            .then(data => console.log(data));
+
+        childToParent(true);
+    }
+
+    const onRemove = () => {
+        removeMovieFromWatchedList(user.member_id, movieId)
+            .then(res => res.json())
+            .then(data => console.log(data));
+
+        childToParent(true);
+    }
+
+    const onDelete = () => {
+        removeMovie(user.member_id, movieId);
+    }
+
+
+
     return (
-        <Row>
+        <Row style={{marginTop: "2rem", marginBottom: "2rem"}}>
             <Col span={11}>
                 <img
                     src={Poster === 'N/A' ? 'https://placehold.it/198x264&text=Image+Not+Found' : Poster}
@@ -13,9 +43,22 @@ const MovieDetail = ({Title, Poster, imdbId, imdbRating, Rated, Runtime, Genre, 
             <Col span={13}>
                 <Row>
                     <Col span={21}>
-                        <h5>{Title}</h5></Col>
+                        <TextTitle>{Title}</TextTitle></Col>
+                    <Row>
+                        { watched
+                            ? <CheckCircleOutlined
+                                onClick={() => onRemove()}
+                                style={{fontSize: "35px", cursor: "pointer", color: "green"}}
+                            />
+                            : <CheckCircleOutlined
+                                onClick={() => onAdd()}
+                                style={{fontSize: "35px", cursor: "pointer", color: "gray"}}
+                            />
+                        }
+                        <MinusCircleOutlined onClick={() => onDelete()} style={{fontSize: "35px", cursor: "pointer", color: "gray"}}/>
+                    </Row>
+                        {/*<PlusCircleOutlined style={{ fontSize: "35px", color: "var(--primary-color)", cursor: "pointer"}} />*/}
                     <Col span={3} style={{textAlign: 'right'}}>
-                        <h5><span style={{color: '#41A8F8'}}>{imdbRating}</span></h5>
                     </Col>
                 </Row>
                 <Row style={{marginBottom: '20px'}}>
@@ -27,6 +70,9 @@ const MovieDetail = ({Title, Poster, imdbId, imdbRating, Rated, Runtime, Genre, 
                 </Row>
                 <Row>
                     <Col>{Plot}</Col>
+                </Row>
+                <Row>
+                    <h5 style={{marginTop: "10px"}}><span style={{color: "var(--primary-color)", marginTop: "30px"}}>{imdbRating}/10</span></h5>
                 </Row>
             </Col>
         </Row>

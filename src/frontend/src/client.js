@@ -22,7 +22,7 @@ export const getMemberByUsernameAndPassword = (username, password) =>
         .then(checkStatus);
 
 export const getMembersMovies = memberId =>
-    fetch(`/api/members/${memberId}`)
+    fetch(`/api/members/${memberId}/movies`)
         .then(checkStatus);
 
 export const getAMembersNonWatchedMovies = memberId =>
@@ -45,6 +45,35 @@ export const getAMembersMoviePosters = memberId =>
     fetch(`/api/movies/${memberId}/posters`)
         .then(checkStatus);
 
+export const addMovieToWatchedList = (memberId, movieId) =>
+    fetch(`/api/members/${memberId}/movies/${movieId}/addWatched`, {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        method: 'PUT',
+        body: JSON.stringify(memberId)
+    })
+        .then(checkStatus);
+
+export const removeMovieFromWatchedList = (memberId, movieId) =>
+    fetch(`/api/members/${memberId}/movies/${movieId}/removeFromWatched`, {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        method: 'PUT',
+        body: JSON.stringify(memberId)
+    })
+        .then(checkStatus);
+
+export const removeMovie = (memberId, movieId) =>
+    fetch(`/api/members/${memberId}/movies/${movieId}`, {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        method: 'PUT',
+        body: JSON.stringify(memberId)
+    })
+        .then(checkStatus);
 
 export const registerAMember = member =>
     fetch("/api/members", {
