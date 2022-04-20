@@ -5,6 +5,8 @@
     right: 0rem;
     padding: 0 2rem;
     padding-bottom: 0.5rem;
+    display: flex;
+    flex-direction: column;
 }
 
 .logout__link {

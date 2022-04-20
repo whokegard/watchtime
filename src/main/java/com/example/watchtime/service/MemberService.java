@@ -7,6 +7,7 @@ import com.example.watchtime.model.Member;
 import com.example.watchtime.model.Movie;
 import com.example.watchtime.model.TVShow;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -34,11 +35,31 @@ public class MemberService {
     }
 
     public void deleteMemberById(long id) {
-        Member member = getMemberByID(id);
-        if (member == null)
+        Optional<Member> maybeMember = memberDAO.findMemberByID(id);
+        if (maybeMember.isEmpty())
             return;
+        Member member = maybeMember.get();
 
-        memberDAO.deleteMemberById(id);
+        List<TVShow> unwatchedTVShows = member.getUnwatched_tvshows();
+        for (int i = 0; i < unwatchedTVShows.size(); i++) {
+            removeTVShow(member.getMember_id(), unwatchedTVShows.get(i).getTvshow_id());
+        }
+
+        List<TVShow> watchedTVShows = member.getWatched_tvshows();
+        for (int i = 0; i < watchedTVShows.size(); i++) {
+            removeTVShow(member.getMember_id(), watchedTVShows.get(i).getTvshow_id());
+        }
+
+        List<Movie> unwatchedMovies = member.getUnwatched_movies();
+        for (int i = 0; i < unwatchedMovies.size(); i++) {
+            removeMovie(member.getMember_id(), unwatchedMovies.get(i).getMovie_id());
+        }
+
+        List<Movie> watchedMovies = member.getWatched_movies();
+        for (int i = 0; i < watchedMovies.size(); i++) {
+            removeMovie(member.getMember_id(), watchedMovies.get(i).getMovie_id());
+        }
+        memberDAO.deleteMemberById(member.getMember_id());
     }
 
     public Member getMemberByUsernameAndPass(String username, String password) {

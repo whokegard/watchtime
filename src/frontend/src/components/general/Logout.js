@@ -13,6 +13,12 @@ const Logout = ({ handleLogout }) => {
     return (
         <div className="logout">
             <Link
+                className="logout__link"
+                to="/member"
+            >
+                Edit Profile
+            </Link>
+            <Link
                 onClick={{ handleLogout, onLogout }}
                 className="logout__link"
                 to="/signin"

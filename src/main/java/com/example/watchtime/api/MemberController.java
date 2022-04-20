@@ -6,6 +6,7 @@ import com.example.watchtime.model.TVShow;
 import com.example.watchtime.service.MemberService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -36,6 +37,19 @@ public class MemberController {
     @DeleteMapping("/{id}")
     public void deleteMemberById(@PathVariable("id") long id) {
         memberService.deleteMemberById(id);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity updateMember(@PathVariable Long id, @RequestBody Member member) {
+        Member currentMember = memberService.getMemberByID(id);
+        currentMember.setUsername(member.getUsername());
+        currentMember.setFirst_name(member.getFirst_name());
+        currentMember.setLast_name(member.getLast_name());
+        currentMember.setEmail(member.getEmail());
+        currentMember.setPassword(member.getPassword());
+        memberService.addMember(member);
+
+        return ResponseEntity.ok(currentMember);
     }
 
     @GetMapping("/{id}/movies")

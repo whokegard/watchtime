@@ -48,9 +48,6 @@ const Header = () => {
                             className="nav navbar-nav ms-auto"
                             style={{ fontSize: "30px" }}
                         >
-                            <Link className="link" to="/">
-                                Home
-                            </Link>
                             {isLoggedIn ? (
                                 <Link className="link" to="/explore">
                                     Explore
@@ -60,7 +57,7 @@ const Header = () => {
                             )
                             }
                             {isLoggedIn ? (
-                                <Link className="link" to="/profile">
+                                <Link className="link" to="/">
                                     Profile
                                 </Link>
                             ) : (
