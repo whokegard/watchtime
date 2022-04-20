@@ -40,7 +40,7 @@ function App() {
                                 }
                             />
                             <Route
-                                path="/"
+                                path="/profile"
                                 element={
                                     <>
                                         <Profile />
@@ -48,7 +48,7 @@ function App() {
                                 }
                             />
                             <Route
-                                path="/explore"
+                                path="/"
                                 element={
                                     <>
                                         <Explore />

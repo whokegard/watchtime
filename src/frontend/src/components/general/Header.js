@@ -49,7 +49,7 @@ const Header = () => {
                             style={{ fontSize: "30px" }}
                         >
                             {isLoggedIn ? (
-                                <Link className="link" to="/explore">
+                                <Link className="link" to="/">
                                     Explore
                                 </Link>
                             ) : (
@@ -57,7 +57,7 @@ const Header = () => {
                             )
                             }
                             {isLoggedIn ? (
-                                <Link className="link" to="/">
+                                <Link className="link" to="/profile">
                                     Profile
                                 </Link>
                             ) : (

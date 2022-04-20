@@ -7,7 +7,7 @@ const EmptyCard = () => {
 
     return (
         <div
-            onClick={() => navigate("/explore")}
+            onClick={() => navigate("/")}
             style={{
             height: "300px",
             width: "230px",
