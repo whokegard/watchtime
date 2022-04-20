@@ -2,10 +2,11 @@ import React, {useContext, useEffect, useState} from "react";
 import {UserContext} from "../general/UserContext";
 import {deleteMemberById, getAMember} from "../../client";
 import "./../../css/Member.css";
+import {useNavigate} from "react-router";
 
 const Member = () => {
-
     const { user } = useContext(UserContext);
+    const navigate = useNavigate();
 
     const fetchAMember = () => getAMember(user.member_id)
         .then(resp => resp)
@@ -13,6 +14,13 @@ const Member = () => {
         .then(data => {
             console.log(data);
         });
+
+    const deleteMember = () => {
+        deleteMemberById(user.member_id)
+            .then(res => res.json())
+            .then(data => console.log(data));
+            navigate("/signin");
+    }
 
     useEffect(() => {
         fetchAMember();
@@ -25,7 +33,7 @@ const Member = () => {
             <h3>Username: {user.username}</h3>
                 <h3>Name: {user.first_name} {user.last_name}</h3>
                 <h3>Email: {user.email}</h3>
-                <button className="member-button" onClick={deleteMemberById}>Delete Account</button>
+                <button className="member-button" onClick={() => deleteMember()}>Delete Account</button>
 </div>
 </div>
     );

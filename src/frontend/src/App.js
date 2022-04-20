@@ -5,7 +5,6 @@ import { BrowserRouter as Router, Routes, Link, Route } from "react-router-dom";
 import Header from "./components/general/Header";
 import Footer from "./components/general/Footer";
 import SignIn from "./components/sign_in/SignIn";
-import Home from "./components/home/Home";
 import Profile from "./components/profile/Profile";
 import Register from "./components/sign_in/Register";
 import Explore from "./components/explore/Explore"
@@ -25,14 +24,6 @@ function App() {
                         <Header />
                         <Routes>
                             <Route
-                                path="/"
-                                element={
-                                    <>
-                                        <Home />
-                                    </>
-                                }
-                            />
-                            <Route
                                 path="/member"
                                 element={
                                     <>
@@ -49,7 +40,7 @@ function App() {
                                 }
                             />
                             <Route
-                                path="/profile"
+                                path="/"
                                 element={
                                     <>
                                         <Profile />

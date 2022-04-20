@@ -96,7 +96,7 @@ const TVShowList = () => {
                 <Col>
                     <EmptyCard />
                 </Col>
-            }}
+            }
         </Row>
       </div>
 

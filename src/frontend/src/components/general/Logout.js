@@ -16,7 +16,7 @@ const Logout = ({ handleLogout }) => {
                 className="logout__link"
                 to="/member"
             >
-                Profile
+                Edit Profile
             </Link>
             <Link
                 onClick={{ handleLogout, onLogout }}
