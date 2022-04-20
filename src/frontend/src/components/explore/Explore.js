@@ -7,10 +7,12 @@ import Card from "react-bootstrap/Card";
 import {addMovie, addMemberToMovie, addTVShow, addMemberToTVShow} from "../../client";
 import "./../../css/Explore.css";
 import {UserContext} from "../general/UserContext";
+import {LoggedInContext} from "../general/LoggedInContext";
 
 const { Search } = Input;
 
 const Explore = () => {
+    const { isLoggedIn } = useContext(LoggedInContext);
     const { user } = useContext(UserContext);
     const API_KEY = "ba1855b1";
     const [searchResult, setSearchResult] = useState(null);
@@ -94,56 +96,62 @@ const Explore = () => {
 
     return (
         <div className="view">
-        <div style={{margin: "5rem"}}>
-            {searchFunction}
-            <div className="search_list">
-                <Row xs={1} md={6} className="g-4">
-                    {searchResult != null && searchResult.length > 0 && searchResult.map((result, index) => (
-                        <Col
-                            key={index}
-                            style={{padding: "0"}}
-                        >
-                            {Array.from({ length: 1 }).map((_, idx) => (
-                                <div className="container"
-                                style={{position: "relative", marginTop: "2rem"}}>
-                                    <Card
-                                        style={{
-                                            borderRadius: "5px",
-                                            height: "auto",
-                                            width: "auto",
-                                            marginRight: "2rem",
-                                            background: "none",
-                                        }}
-                                    >
-                                <AiOutlinePlusSquare onClick={() => {addMovieOrTvShow(result)}} size={35} color={"var(--primary-color)"}
-                                                     style={{
-                                                         background: "rgba(211, 211, 211, 0.3)",
-                                                         position: "absolute",
-                                                         zIndex: "1",
-                                                         cursor: "pointer",
-                                                         top: "10%",
-                                                         left: "85%",
-                                                         transform: "translate(-50%, -50%)",
-                                                        }}/>
-                                        <Card.Img
+            {isLoggedIn ?
+            <div style={{margin: "5rem"}}>
+                {searchFunction}
+                <div className="search_list">
+                    <Row xs={1} md={6} className="g-4">
+                        {searchResult != null && searchResult.length > 0 && searchResult.map((result, index) => (
+                            <Col
+                                key={index}
+                                style={{padding: "0"}}
+                            >
+                                {Array.from({length: 1}).map((_, idx) => (
+                                    <div className="container"
+                                         style={{position: "relative", marginTop: "2rem"}}>
+                                        <Card
                                             style={{
-                                                height: "100%",
-                                                width: "100%",
+                                                borderRadius: "5px",
+                                                height: "auto",
+                                                width: "auto",
+                                                marginRight: "2rem",
+                                                background: "none",
                                             }}
-                                            variant="top"
-                                            alt={result && result.Title}
-                                            src={result && result.Poster}
-                                            /*onClick={setShowDetail}*/
-                                        />
-                                        <button className="button">{result.Title}</button>
-                                    </Card>
-                                </div>
-                            ))}
-                        </Col>
-                    ))}
-                </Row>
+                                        >
+                                            <AiOutlinePlusSquare onClick={() => {
+                                                addMovieOrTvShow(result)
+                                            }} size={35} color={"var(--primary-color)"}
+                                                                 style={{
+                                                                     background: "rgba(211, 211, 211, 0.3)",
+                                                                     position: "absolute",
+                                                                     zIndex: "1",
+                                                                     cursor: "pointer",
+                                                                     top: "10%",
+                                                                     left: "85%",
+                                                                     transform: "translate(-50%, -50%)",
+                                                                 }}/>
+                                            <Card.Img
+                                                style={{
+                                                    height: "100%",
+                                                    width: "100%",
+                                                }}
+                                                variant="top"
+                                                alt={result && result.Title}
+                                                src={result && result.Poster}
+                                                /*onClick={setShowDetail}*/
+                                            />
+                                            <button className="button">{result.Title}</button>
+                                        </Card>
+                                    </div>
+                                ))}
+                            </Col>
+                        ))}
+                    </Row>
+                </div>
             </div>
-        </div>
+            :
+            <></>
+            }
         </div>
     );
 }

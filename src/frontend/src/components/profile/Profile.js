@@ -1,14 +1,22 @@
-import React from "react";
+import React, {useContext} from "react";
 import MovieList from "./TVShowList";
 import TVShowList from "./MovieList";
+import {LoggedInContext} from "../general/LoggedInContext";
 
 const Profile = () => {
+    const { isLoggedIn } = useContext(LoggedInContext);
 
     return (
-        <div className="profile" style={{height: "100"}}>
-        <MovieList />
-        <TVShowList />
-        </div>
+            <div className={"view"}>
+                {isLoggedIn ?
+                    <div>
+                        <MovieList/>
+                        <TVShowList/>
+                    </div>
+                    :
+                    <></>
+                }
+            </div>
     );
 }
 

@@ -4,7 +4,8 @@ import { Card, Button } from "react-bootstrap";
 const Footer = () => {
     return (
         <div className="text-center" style={{
-            background: "linear-gradient(#303030, #454545)" }}>
+            background: "linear-gradient(#303030, #454545)"
+        }}>
             <Card.Body>
                 <Card.Text style={{
                     color: "var(--primary-color)"}}>
