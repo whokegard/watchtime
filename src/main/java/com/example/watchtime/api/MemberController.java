@@ -70,6 +70,12 @@ public class MemberController {
         memberService.removeMovie(memberId, movieId);
     }
 
+    @PutMapping("/{id}/tvShow/{tvShowId}")
+    public void removeTVShow(@PathVariable("id") long memberId,
+                            @PathVariable("tvShowId") long tvShowId) {
+        memberService.removeTVShow(memberId, tvShowId);
+    }
+
     @GetMapping("/{id}/watchedMovies")
     public List<Movie> getAMembersWatchedMovies(@PathVariable("id") long memberId) {
         return memberService.getAMembersWatchedMovies(memberId);

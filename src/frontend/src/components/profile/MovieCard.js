@@ -4,8 +4,6 @@ import {Modal} from "antd";
 import MovieDetail from "./MovieDetail";
 import ColCardBox from "./ColCardBox";
 import 'antd/dist/antd.css';
-import {getAMembersNonWatchedMovies, getAMembersWatchedMovies} from "../../client";
-import {UserContext} from "../general/UserContext";
 
 const MovieCard = ({childToParent, imdbId, watched, movieId}) => {
     const API_KEY = "ba1855b1";

@@ -1,74 +1,107 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect, useRef, useState} from "react";
 import { Row, Col} from "react-bootstrap";
-import MovieCard from "./MovieCard";
-import "../../css/MovieList.css";
-import {UserContext} from "../general/UserContext";
 import {getAMembersWatchedTVShows, getAMembersNonWatchedTVShows} from "../../client";
+import { UserContext } from "../general/UserContext";
+import TVShowCard from "./TVShowCard";
+import "../../css/TVShowList.css";
+import EmptyCard from "./EmptyCard";
 
 const TVShowList = () => {
-    const [watchedTVShows, setWatchedTVShows] = useState([]);
-    const [nonWatchedTVShows, setNonWatchedTVShows] = useState([]);
-    const { user } = useContext(UserContext);
+  const [watchedTvShows, setWatchedTvShows] = useState([]);
+  const [nonWatchedTvShows, setNonWatchedTvShows] = useState([]);
+  const { user } = useContext(UserContext);
 
-    const fetchAMembersWatchedTVShows = () => getAMembersWatchedTVShows(user.member_id)
-        .then(resp => resp)
-        .then(res => res.json())
-        .then(data => {
-            setWatchedTVShows(data);
-            console.log(data);
-        });
+    const childToParent = () => {
 
-    useEffect(() => {
-        fetchAMembersWatchedTVShows();
-    }, []);
+        setWatchedTvShows([]);
+        setNonWatchedTvShows([]);
+            fetchAMembersWatchedTVShows();
+            fetchAMembersNonWatchedTVShows();
+        console.log("do");
+    };
 
-    const fetchAMembersNonWatchedTVShows = () => getAMembersNonWatchedTVShows(user.member_id)
-        .then(resp => resp)
-        .then(res => res.json())
-        .then(data => {
-            setNonWatchedTVShows(data);
-            console.log(data);
-        });
+  const fetchAMembersWatchedTVShows = () => getAMembersWatchedTVShows(user.member_id)
+      .then(resp => resp)
+      .then(res => res.json())
+      .then(data => {
+        setWatchedTvShows(data);
+        console.log(data);
+          console.log("hello");
+      });
 
-    useEffect(() => {
-        fetchAMembersNonWatchedTVShows();
-    }, []);
+  useEffect(() => {
+      fetchAMembersWatchedTVShows();
+      fetchAMembersNonWatchedTVShows();
+      console.log("yello");
+  }, []);
 
-
-    return (
-        <div className="view">
-            <div className="movie_list">
-                <h5>Not Watched TV-Shows</h5>
-                <Row xs={1} md={6} className="g-4">
-                    {nonWatchedTVShows.map((tvshow, index) => (
-                        <Col
-                            key={index}
-                            style={{padding: "0"}}
-                        >
-                            {Array.from({ length: 1 }).map((_, idx) => (
-                                <MovieCard key={tvshow.tvshow_id} imdbId={tvshow.imdb_id}/>
-                            ))}
-                        </Col>
-                    ))}
-                </Row>
-                <h5 style={{paddingTop: "2rem"}}>Watched TV-Shows</h5>
-                <Row xs={1} md={6} className="g-4">
-                    {watchedTVShows.map((tvshow, index) => (
-                        <Col
-                            key={index}
-                            style={{padding: "0"}}
-                        >
-                            {Array.from({ length: 1 }).map((_, idx) => (
-                                <MovieCard key={tvshow.tvshow_id} imdbId={tvshow.imdb_id}/>
-                            ))}
-                        </Col>
-                    ))}
-                </Row>
-            </div>
-        </div>
+  const fetchAMembersNonWatchedTVShows = () => getAMembersNonWatchedTVShows(user.member_id)
+      .then(resp => resp)
+      .then(res => res.json())
+      .then(data => {
+        setNonWatchedTvShows(data);
+        console.log(data);
+          console.log("bye");
+      });
 
 
-    );
+  return (
+      <div className="tvshow_list">
+          <h5>Not Watched TV-Shows</h5>
+          <Row xs={1} md={6} className="g-4">
+              {nonWatchedTvShows.length !== 0 ?
+                  nonWatchedTvShows.map((tvShow, index) => (
+                          <Col
+                              key={index}
+                              style={{padding: "0"}}
+                          >
+                              {Array.from({ length: 1 }).map((data, index) => (
+                                  <TVShowCard
+                                      key={index}
+                                      watched={false}
+                                      imdbId={tvShow.imdb_id}
+                                      tvShowId={tvShow.tvshow_id}
+                                      childToParent={childToParent}
+                                  />
+                              ))}
+                          </Col>
+                      ))
+                  :
+                  <Col>
+                      <EmptyCard />
+                  </Col>
+              }
+
+          </Row>
+        <h5 style={{paddingTop: "2rem"}}>Watched TV-Shows</h5>
+        <Row xs={1} md={6} className="g-4">
+            {watchedTvShows.length !== 0 ?
+                watchedTvShows.map((tvShow, index) => (
+                    <Col
+                        key={index}
+                        style={{padding: "0"}}
+                    >
+                        {Array.from({length: 1}).map((data, index) => (
+                            <TVShowCard
+                                key={index}
+                                imdbId={tvShow.imdb_id}
+                                watched={true}
+                                tvShowId={tvShow.tvshow_id}
+                                childToParent={childToParent}
+                            />
+                        ))}
+                    </Col>
+                ))
+                :
+                <Col>
+                    <EmptyCard />
+                </Col>
+            }}
+        </Row>
+      </div>
+
+
+  );
 }
 
 export default TVShowList;

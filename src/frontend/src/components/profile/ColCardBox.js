@@ -28,9 +28,11 @@ const ColCardBox = ({Title, imdbID, Poster, ShowDetail, DetailRequest, ActivateM
                 style={{
                     borderRadius: "5px",
                     height: "auto",
-                    width: "20vh",
+                    width: "250px",
                     background: "none",
-                    cursor: "pointer"
+                    cursor: "pointer",
+                    marginLeft: "10px",
+                    paddingRight: "30px"
                 }}
                 onClick={() => clickHandler()}
             >

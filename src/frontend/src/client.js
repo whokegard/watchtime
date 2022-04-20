@@ -41,10 +41,6 @@ export const getAMembersWatchedTVShows = memberId =>
     fetch(`/api/members/${memberId}/watchedTVShows`)
         .then(checkStatus);
 
-export const getAMembersMoviePosters = memberId =>
-    fetch(`/api/movies/${memberId}/posters`)
-        .then(checkStatus);
-
 export const addMovieToWatchedList = (memberId, movieId) =>
     fetch(`/api/members/${memberId}/movies/${movieId}/addWatched`, {
         headers: {
@@ -65,8 +61,38 @@ export const removeMovieFromWatchedList = (memberId, movieId) =>
     })
         .then(checkStatus);
 
+export const addTVShowToWatchedList = (memberId, tvShowId) =>
+    fetch(`/api/members/${memberId}/tvShow/${tvShowId}/addWatched`, {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        method: 'PUT',
+        body: JSON.stringify(memberId)
+    })
+        .then(checkStatus);
+
+export const removeTVShowFromWatchedList = (memberId, tvShowId) =>
+    fetch(`/api/members/${memberId}/tvShow/${tvShowId}/removeFromWatched`, {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        method: 'PUT',
+        body: JSON.stringify(memberId)
+    })
+        .then(checkStatus);
+
 export const removeMovie = (memberId, movieId) =>
     fetch(`/api/members/${memberId}/movies/${movieId}`, {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        method: 'PUT',
+        body: JSON.stringify(memberId)
+    })
+        .then(checkStatus);
+
+export const removeTVShow = (memberId, tvShowId) =>
+    fetch(`/api/members/${memberId}/tvShow/${tvShowId}`, {
         headers: {
             'Content-Type': 'application/json'
         },
@@ -106,26 +132,6 @@ export const addMovie = movie =>
         body: JSON.stringify(movie)
     });
 
-export const addMemberToMovie = (imdbId, memberId) =>
-    fetch(`/api/movies/${imdbId}/members/${memberId}`, {
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        method: 'PUT',
-        body: JSON.stringify(memberId)
-    })
-    .then(checkStatus);
-
-export const addMemberToTVShow = (imdbId, memberId) =>
-    fetch(`/api/tvshow/${imdbId}/members/${memberId}`, {
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        method: 'PUT',
-        body: JSON.stringify(memberId)
-    })
-        .then(checkStatus);
-
 export const addTVShow = tvshow =>
     fetch("/api/tvshow", {
         headers: {
@@ -134,4 +140,24 @@ export const addTVShow = tvshow =>
         method: 'POST',
         body: JSON.stringify(tvshow)
     });
+
+export const addMemberToMovie = (movieId, memberId) =>
+    fetch(`/api/movies/${movieId}/members/${memberId}`, {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        method: 'PUT',
+        body: JSON.stringify(memberId)
+    })
+    .then(checkStatus);
+
+export const addMemberToTVShow = (tvshowId, memberId) =>
+    fetch(`/api/tvshow/${tvshowId}/members/${memberId}`, {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        method: 'PUT',
+        body: JSON.stringify(memberId)
+    })
+        .then(checkStatus);
 

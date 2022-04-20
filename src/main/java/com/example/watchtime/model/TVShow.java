@@ -26,7 +26,7 @@ public class TVShow {
     private String title;
 
     @Column
-    private int year;
+    private String year;
 
     @Column
     @ManyToMany
@@ -37,9 +37,4 @@ public class TVShow {
     @ManyToMany
     @JsonIgnore
     private List<Member> member_list;
-
-    @Column
-    @ManyToMany
-    @JsonIgnore
-    private List<Rating> rating_list;
 }
