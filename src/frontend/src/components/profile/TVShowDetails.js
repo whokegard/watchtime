@@ -27,10 +27,12 @@ const TVShowDetails = ({childToParent, watched, tvShowId, Title, Poster, imdbRat
     }
 
     const onDelete = () => {
-        removeTVShow(user.member_id, tvShowId);
+        removeTVShow(user.member_id, tvShowId)
+            .then(res => res.json())
+            .then(data => console.log(data));;
+
+        childToParent(true);
     }
-
-
 
     return (
         <Row style={{marginTop: "2rem", marginBottom: "2rem"}}>

@@ -10,40 +10,50 @@ const TVShowList = () => {
   const [watchedTvShows, setWatchedTvShows] = useState([]);
   const [nonWatchedTvShows, setNonWatchedTvShows] = useState([]);
   const { user } = useContext(UserContext);
+    const [loading, setLoading] = useState(false);
+    const [data, setData] = useState(false);
 
     const childToParent = () => {
-
         setWatchedTvShows([]);
         setNonWatchedTvShows([]);
-            fetchAMembersWatchedTVShows();
-            fetchAMembersNonWatchedTVShows();
         console.log("do");
+        setData(true);
     };
 
-  const fetchAMembersWatchedTVShows = () => getAMembersWatchedTVShows(user.member_id)
-      .then(resp => resp)
-      .then(res => res.json())
-      .then(data => {
-        setWatchedTvShows(data);
-        console.log(data);
-          console.log("hello");
-      });
+  const fetchAMembersWatchedTVShows = () => {
+      setLoading(true)
+      getAMembersWatchedTVShows(user.member_id)
+          .then(resp => resp)
+          .then(res => res.json())
+          .then(data => {
+              setWatchedTvShows(data);
+              console.log(data);
+              console.log("hello");
+          });
+      setLoading(false);
+      setData(false);
+  }
 
   useEffect(() => {
       fetchAMembersWatchedTVShows();
       fetchAMembersNonWatchedTVShows();
-      console.log("yello");
-  }, []);
+      console.log("bello");
+      setData(false);
+  }, [data]);
 
-  const fetchAMembersNonWatchedTVShows = () => getAMembersNonWatchedTVShows(user.member_id)
-      .then(resp => resp)
-      .then(res => res.json())
-      .then(data => {
-        setNonWatchedTvShows(data);
-        console.log(data);
-          console.log("bye");
-      });
-
+  const fetchAMembersNonWatchedTVShows = () => {
+      setLoading(true)
+      getAMembersNonWatchedTVShows(user.member_id)
+          .then(resp => resp)
+          .then(res => res.json())
+          .then(data => {
+              setNonWatchedTvShows(data);
+              console.log(data);
+              console.log("bye");
+          });
+      setLoading(false);
+      setData(false);
+  }
 
   return (
       <div className="tvshow_list">
