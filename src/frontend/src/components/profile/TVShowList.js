@@ -14,46 +14,39 @@ const TVShowList = () => {
     const [data, setData] = useState(false);
 
     const childToParent = () => {
+        setData(true);
         setWatchedTvShows([]);
         setNonWatchedTvShows([]);
         console.log("do");
-        setData(true);
     };
 
-  const fetchAMembersWatchedTVShows = () => {
-      setLoading(true)
-      getAMembersWatchedTVShows(user.member_id)
-          .then(resp => resp)
-          .then(res => res.json())
-          .then(data => {
-              setWatchedTvShows(data);
-              console.log(data);
-              console.log("hello");
-          });
-      setLoading(false);
-      setData(false);
-  }
+    const setMembersTVShows = () => {
+        setLoading(true);
+        getAMembersWatchedTVShows(user.member_id)
+            .then(resp => resp)
+            .then(res => res.json())
+            .then(data => {
+                setWatchedTvShows(data);
+                console.log(data);
+                console.log("hello");
+            });
+
+        getAMembersNonWatchedTVShows(user.member_id)
+            .then(resp => resp)
+            .then(res => res.json())
+            .then(data => {
+                setNonWatchedTvShows(data);
+                console.log(data);
+                console.log("bye");
+            });
+        setLoading(false);
+    }
 
   useEffect(() => {
-      fetchAMembersWatchedTVShows();
-      fetchAMembersNonWatchedTVShows();
+      setMembersTVShows();
       console.log("bello");
       setData(false);
   }, [data]);
-
-  const fetchAMembersNonWatchedTVShows = () => {
-      setLoading(true)
-      getAMembersNonWatchedTVShows(user.member_id)
-          .then(resp => resp)
-          .then(res => res.json())
-          .then(data => {
-              setNonWatchedTvShows(data);
-              console.log(data);
-              console.log("bye");
-          });
-      setLoading(false);
-      setData(false);
-  }
 
   return (
       <div className="tvshow_list">
@@ -109,8 +102,6 @@ const TVShowList = () => {
             }
         </Row>
       </div>
-
-
   );
 }
 

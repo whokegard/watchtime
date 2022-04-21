@@ -9,7 +9,6 @@ const TextTitle = Typography.Title;
 const MovieDetail = ({childToParent, watched, movieId, Title, Poster, imdbRating, Rated, Runtime, Genre, Plot}) => {
     const { user }  = useContext(UserContext);
 
-
     const onAdd = () => {
         addMovieToWatchedList(user.member_id, movieId)
             .then(res => res.json())
@@ -27,10 +26,12 @@ const MovieDetail = ({childToParent, watched, movieId, Title, Poster, imdbRating
     }
 
     const onDelete = () => {
-        removeMovie(user.member_id, movieId);
+        removeMovie(user.member_id, movieId)
+            .then(res => res.json())
+            .then(data => console.log(data));
+
+        childToParent(true);
     }
-
-
 
     return (
         <Row style={{marginTop: "2rem", marginBottom: "2rem"}}>

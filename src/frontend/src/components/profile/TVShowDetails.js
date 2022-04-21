@@ -9,7 +9,6 @@ const TextTitle = Typography.Title;
 const TVShowDetails = ({childToParent, watched, tvShowId, Title, Poster, imdbRating, Rated, Runtime, Genre, Plot}) => {
     const { user }  = useContext(UserContext);
 
-
     const onAdd = () => {
         addTVShowToWatchedList(user.member_id, tvShowId)
             .then(res => res.json())
@@ -29,7 +28,7 @@ const TVShowDetails = ({childToParent, watched, tvShowId, Title, Poster, imdbRat
     const onDelete = () => {
         removeTVShow(user.member_id, tvShowId)
             .then(res => res.json())
-            .then(data => console.log(data));;
+            .then(data => console.log(data));
 
         childToParent(true);
     }

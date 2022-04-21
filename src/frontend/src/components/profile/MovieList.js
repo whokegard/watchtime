@@ -10,40 +10,42 @@ const MovieList = () => {
     const [watchedMovies, setWatchedMovies] = useState([]);
     const [nonWatchedMovies, setNonWatchedMovies] = useState([]);
     const { user } = useContext(UserContext);
+    const [loading, setLoading] = useState(false);
+    const [data, setData] = useState(false);
 
     const childToParent = () => {
-
+        setData(true);
         setWatchedMovies([]);
         setNonWatchedMovies([]);
-        fetchAMembersWatchedMovies();
-        fetchAMembersNonWatchedMovies();
         console.log("do");
     };
 
-    const fetchAMembersWatchedMovies = () => getAMembersWatchedMovies(user.member_id)
-        .then(resp => resp)
-        .then(res => res.json())
-        .then(data => {
-            setWatchedMovies(data);
-            console.log(data);
-            console.log("hello");
-        });
+    const setMembersMovies = () => {
+        setLoading(true);
+        getAMembersWatchedMovies(user.member_id)
+            .then(resp => resp)
+            .then(res => res.json())
+            .then(data => {
+                setWatchedMovies(data);
+                console.log(data);
+                console.log("hello");
+            });
+
+        getAMembersNonWatchedMovies(user.member_id)
+            .then(resp => resp)
+            .then(res => res.json())
+            .then(data => {
+                setNonWatchedMovies(data);
+                console.log(data);
+                console.log("bye");
+            });
+        setLoading(false);
+    }
 
     useEffect(() => {
-        fetchAMembersWatchedMovies();
-        fetchAMembersNonWatchedMovies();
-        console.log("yello");
-    }, []);
-
-    const fetchAMembersNonWatchedMovies = () => getAMembersNonWatchedMovies(user.member_id)
-        .then(resp => resp)
-        .then(res => res.json())
-        .then(data => {
-            setNonWatchedMovies(data);
-            console.log(data);
-            console.log("bye");
-        });
-
+        setMembersMovies();
+        setData(false);
+    }, [data])
 
     return (
         <div style={{margin: "0"}}>
