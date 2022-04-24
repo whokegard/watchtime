@@ -56,7 +56,7 @@ const MovieDetail = ({childToParent, watched, movieId, Title, Poster, imdbRating
                                 style={{fontSize: "35px", cursor: "pointer", color: "gray"}}
                             />
                         }
-                        <MinusCircleOutlined onClick={() => onDelete()} style={{fontSize: "35px", cursor: "pointer", color: "gray"}}/>
+                        <MinusCircleOutlined onClick={() => onDelete()} style={{fontSize: "35px", cursor: "pointer", color: "red"}}/>
                     </Row>
                         {/*<PlusCircleOutlined style={{ fontSize: "35px", color: "var(--primary-color)", cursor: "pointer"}} />*/}
                     <Col span={3} style={{textAlign: 'right'}}>

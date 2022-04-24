@@ -14,10 +14,10 @@ const TVShowList = () => {
     const [data, setData] = useState(false);
 
     const childToParent = () => {
-        setData(true);
         setWatchedTvShows([]);
         setNonWatchedTvShows([]);
         console.log("do");
+        setData(true);
     };
 
     const setMembersTVShows = () => {

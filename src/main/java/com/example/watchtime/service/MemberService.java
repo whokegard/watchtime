@@ -22,8 +22,8 @@ public class MemberService {
     private final MovieDAO movieDAO;
     private final TVShowDAO tvShowDAO;
 
-    public void addMember(Member newMember) {
-        memberDAO.saveMember(newMember);
+    public Member addMember(Member newMember) {
+        return memberDAO.saveMember(newMember);
     }
 
     public List<Member> getAllMembers() {

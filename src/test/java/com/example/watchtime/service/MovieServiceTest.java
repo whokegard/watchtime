@@ -45,26 +45,6 @@ class MovieServiceTest {
     void tearDown() {
     }
 
-   /* @Test
-    void returnExistingMovieIfDBHasIt() {
-        // Setup
-
-        Movie newMovie = new Movie(2, "tt1631867", "Edge of Tomorrow", 2014, new ArrayList<>(), new ArrayList<>());
-        Movie movieFromDB = new Movie(2, "tt1631867", "Edge of Tomorrow", 2014, new ArrayList<>(), new ArrayList<>());
-
-        Mockito.when(movieDAO.findMovieById(2)).thenReturn(Optional.of(movieFromDB));
-
-        given(movieDAO.findMovieById(anyInt())).willReturn(Optional.of(movieFromDB));
-
-        //Test
-        Movie actualMovie = unitUnderTest.addMovie(newMovie);
-
-        // verify
-        assertEquals(2, movieFromDB.getMovie_id());
-        assertEquals("tt1631867", movieFromDB.getImdb_id());
-        assertEquals(2014, movieFromDB.getYear());
-    }*/
-
     @Test
     void addMovieIfDBDoesNotHaveIt() {
         // Setup
@@ -100,13 +80,13 @@ class MovieServiceTest {
         when(movieDAO.findMovieById(anyLong())).thenReturn(Optional.of(movieFromDB));
         when(memberDAO.findMemberByID(anyLong())).thenReturn(Optional.of(memberFromDB));
 
-        when(movieDAO.save(any())).thenReturn(movieFromDB);
+        //when(movieDAO.save(any())).thenReturn(movieFromDB);
 
         // Test
 
         unitUnderTest.addMemberToMovie(movieFromDB.getMovie_id(), memberFromDB.getMember_id());
         ArgumentCaptor<Movie> movieArgumentCaptor = ArgumentCaptor.forClass(Movie.class);
-        verify(movieDAO).save(movieArgumentCaptor.capture());
+        verify(movieDAO, Mockito.times(1)).save(movieArgumentCaptor.capture());
         Movie capturedMovie = movieArgumentCaptor.getValue();
 
         assertThat(capturedMovie).isEqualTo(movieFromDB);

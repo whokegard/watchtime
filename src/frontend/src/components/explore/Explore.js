@@ -112,8 +112,6 @@ const Explore = () => {
                                         <Card
                                             style={{
                                                 borderRadius: "5px",
-                                                height: "auto",
-                                                width: "auto",
                                                 marginRight: "2rem",
                                                 background: "none",
                                             }}

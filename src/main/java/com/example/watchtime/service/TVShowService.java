@@ -26,18 +26,14 @@ public class TVShowService {
         return tvShowDAO.save(newTVShow);
     }
 
-    public List<TVShow> getAllTVShows() {
-        return (List<TVShow>) tvShowDAO.findAllTVShows();
-    }
-
-    public TVShow addMemberToTVShow(long tvshowId, long memberId) {
-        Optional<TVShow> maybeTvshow = tvShowDAO.findTVShowById(tvshowId);
+    public TVShow addMemberToTVShow(long tvShowId, long memberId) {
+        Optional<TVShow> maybeTVShow = tvShowDAO.findTVShowById(tvShowId);
         Optional<Member> maybeMember = memberDAO.findMemberByID(memberId);
-        if (maybeMember.isEmpty() || maybeTvshow.isEmpty()) {
+        if (maybeMember.isEmpty() || maybeTVShow.isEmpty()) {
             return null;
         }
         Member member = maybeMember.get();
-        TVShow tvshow = maybeTvshow.get();
+        TVShow tvshow = maybeTVShow.get();
 
         List<Member> members = tvshow.getMember_list();
         members.add(member);
@@ -54,5 +50,9 @@ public class TVShowService {
         return getAllTVShows().stream()
                 .filter(tvShow -> tvShow.getImdb_id().equalsIgnoreCase(imdbId))
                 .findFirst().orElse(null);
+    }
+
+    private List<TVShow> getAllTVShows() {
+        return (List<TVShow>) tvShowDAO.findAllTVShows();
     }
 }

@@ -15,8 +15,8 @@ public class MemberDAO {
 
     private final MemberRepository memberRepository;
 
-    public void saveMember(Member newMember) {
-        memberRepository.save(newMember);
+    public Member saveMember(Member newMember) {
+        return memberRepository.save(newMember);
     }
 
     public Optional<Member> findMemberByID(long id) {
